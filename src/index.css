@@ -2,95 +2,102 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* BiteSide Story - Feminine Pastel Design System */
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600;700&family=Quicksand:wght@400;500;600;700&display=swap');
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Pastel Pink/Purple/Yellow Palette */
+    --background: 320 60% 97%;
+    --foreground: 320 40% 25%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card: 320 50% 98%;
+    --card-foreground: 320 40% 25%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover: 320 50% 98%;
+    --popover-foreground: 320 40% 25%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    /* Soft Pink Primary */
+    --primary: 340 70% 75%;
+    --primary-foreground: 340 60% 20%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    /* Lavender Purple Secondary */
+    --secondary: 280 50% 85%;
+    --secondary-foreground: 280 40% 25%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    /* Lemon Yellow Accent */
+    --accent: 45 90% 70%;
+    --accent-foreground: 45 80% 20%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --muted: 320 30% 92%;
+    --muted-foreground: 320 20% 45%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 320 40% 88%;
+    --input: 320 40% 90%;
+    --ring: 340 70% 75%;
 
-    --radius: 0.5rem;
+    --radius: 1.5rem;
 
-    --sidebar-background: 0 0% 98%;
+    /* Custom Brand Colors */
+    --pink-soft: 340 70% 85%;
+    --pink-medium: 340 65% 75%;
+    --pink-deep: 340 60% 65%;
+    --purple-soft: 280 50% 88%;
+    --purple-medium: 280 45% 78%;
+    --purple-deep: 280 40% 65%;
+    --yellow-soft: 45 85% 80%;
+    --yellow-medium: 45 90% 70%;
+    --yellow-deep: 40 85% 55%;
+    --cream: 40 50% 96%;
 
-    --sidebar-foreground: 240 5.3% 26.1%;
+    /* Gradients */
+    --gradient-hero: linear-gradient(135deg, hsl(340 70% 85%), hsl(280 50% 88%), hsl(45 85% 85%));
+    --gradient-button: linear-gradient(135deg, hsl(340 70% 75%), hsl(340 65% 70%));
+    --gradient-button-hover: linear-gradient(135deg, hsl(340 75% 70%), hsl(340 70% 65%));
+    --gradient-card: linear-gradient(145deg, hsl(320 50% 98%), hsl(280 40% 95%));
+    --gradient-accent: linear-gradient(135deg, hsl(45 90% 75%), hsl(45 95% 65%));
 
-    --sidebar-primary: 240 5.9% 10%;
-
-    --sidebar-primary-foreground: 0 0% 98%;
-
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-background: 320 60% 97%;
+    --sidebar-foreground: 320 40% 25%;
+    --sidebar-primary: 340 70% 75%;
+    --sidebar-primary-foreground: 340 60% 20%;
+    --sidebar-accent: 280 50% 85%;
+    --sidebar-accent-foreground: 280 40% 25%;
+    --sidebar-border: 320 40% 88%;
+    --sidebar-ring: 340 70% 75%;
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-
+    --background: 320 30% 10%;
+    --foreground: 320 30% 95%;
+    --card: 320 25% 15%;
+    --card-foreground: 320 30% 95%;
+    --popover: 320 25% 15%;
+    --popover-foreground: 320 30% 95%;
+    --primary: 340 60% 70%;
+    --primary-foreground: 340 60% 10%;
+    --secondary: 280 40% 30%;
+    --secondary-foreground: 280 30% 95%;
+    --muted: 320 25% 20%;
+    --muted-foreground: 320 20% 65%;
+    --accent: 45 80% 60%;
+    --accent-foreground: 45 80% 10%;
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
-
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --border: 320 25% 25%;
+    --input: 320 25% 25%;
+    --ring: 340 60% 70%;
+    --sidebar-background: 320 30% 10%;
+    --sidebar-foreground: 320 30% 95%;
+    --sidebar-primary: 340 60% 70%;
+    --sidebar-primary-foreground: 340 60% 10%;
+    --sidebar-accent: 280 40% 30%;
+    --sidebar-accent-foreground: 280 30% 95%;
+    --sidebar-border: 320 25% 25%;
+    --sidebar-ring: 340 60% 70%;
   }
 }
 
@@ -100,6 +107,246 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-quicksand;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-fredoka;
+  }
+}
+
+@layer components {
+  /* Cupcake Button */
+  .btn-cupcake {
+    @apply relative inline-flex items-center justify-center px-8 py-4 font-fredoka font-semibold text-lg;
+    background: var(--gradient-button);
+    color: hsl(var(--primary-foreground));
+    clip-path: path('M50,5 C65,5 75,10 80,20 C90,25 95,35 95,50 C95,70 85,85 75,90 C65,95 55,97 50,97 C45,97 35,95 25,90 C15,85 5,70 5,50 C5,35 10,25 20,20 C25,10 35,5 50,5 Z');
+    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+  }
+
+  .btn-cupcake:hover {
+    background: var(--gradient-button-hover);
+    transform: scale(1.08) rotate(-2deg);
+    box-shadow: 0 8px 25px -5px hsl(340 70% 75% / 0.5);
+  }
+
+  .btn-cupcake:active {
+    transform: scale(0.95);
+  }
+
+  /* Lemon Button */
+  .btn-lemon {
+    @apply relative inline-flex items-center justify-center px-8 py-4 font-fredoka font-semibold text-lg;
+    background: var(--gradient-accent);
+    color: hsl(var(--accent-foreground));
+    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  }
+
+  .btn-lemon:hover {
+    transform: scale(1.1) rotate(5deg);
+    box-shadow: 0 8px 25px -5px hsl(45 90% 60% / 0.5);
+  }
+
+  .btn-lemon:active {
+    transform: scale(0.92);
+  }
+
+  /* Pill/Teacup Button */
+  .btn-teacup {
+    @apply relative inline-flex items-center justify-center px-6 py-3 font-fredoka font-medium;
+    background: hsl(var(--secondary));
+    color: hsl(var(--secondary-foreground));
+    border-radius: 9999px 9999px 40% 40%;
+    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  }
+
+  .btn-teacup:hover {
+    transform: scale(1.05) translateY(-3px);
+    box-shadow: 0 10px 25px -8px hsl(280 50% 70% / 0.4);
+  }
+
+  /* Cuisine Card Styles */
+  .cuisine-card {
+    @apply relative overflow-hidden cursor-pointer;
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .cuisine-card:hover {
+    transform: scale(1.05) translateY(-8px) rotate(1deg);
+    z-index: 10;
+  }
+
+  .cuisine-card:hover .cuisine-overlay {
+    opacity: 1;
+  }
+
+  /* Floating Animation */
+  .float-animation {
+    animation: float 3s ease-in-out infinite;
+  }
+
+  /* Wiggle Animation */
+  .wiggle-hover:hover {
+    animation: wiggle 0.5s ease-in-out;
+  }
+
+  /* Squish Animation */
+  .squish:active {
+    animation: squish 0.3s ease-in-out;
+  }
+
+  /* Glow Effect */
+  .glow-pink {
+    box-shadow: 0 0 20px hsl(340 70% 75% / 0.4), 
+                0 0 40px hsl(340 70% 75% / 0.2),
+                0 0 60px hsl(340 70% 75% / 0.1);
+  }
+
+  .glow-yellow {
+    box-shadow: 0 0 20px hsl(45 90% 70% / 0.5), 
+                0 0 40px hsl(45 90% 70% / 0.3);
+  }
+
+  /* Pun Tooltip */
+  .pun-tooltip {
+    @apply absolute opacity-0 pointer-events-none px-4 py-2 rounded-full font-fredoka text-sm whitespace-nowrap z-50;
+    background: hsl(var(--accent));
+    color: hsl(var(--accent-foreground));
+    transition: all 0.3s ease;
+    transform: translateY(10px);
+  }
+
+  .pun-trigger:hover .pun-tooltip {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Background Pattern Overlay */
+  .pattern-bg {
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+  }
+}
+
+@layer utilities {
+  /* Custom Gradients */
+  .bg-gradient-hero {
+    background: var(--gradient-hero);
+  }
+
+  .bg-gradient-card {
+    background: var(--gradient-card);
+  }
+
+  .bg-gradient-button {
+    background: var(--gradient-button);
+  }
+
+  /* Text Gradients */
+  .text-gradient-pink {
+    background: linear-gradient(135deg, hsl(340 70% 65%), hsl(280 50% 65%));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .text-gradient-accent {
+    background: linear-gradient(135deg, hsl(45 90% 55%), hsl(40 95% 50%));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Custom Shadows */
+  .shadow-soft {
+    box-shadow: 0 10px 40px -10px hsl(340 50% 70% / 0.3);
+  }
+
+  .shadow-card {
+    box-shadow: 0 15px 50px -15px hsl(280 40% 60% / 0.25),
+                0 5px 20px -5px hsl(340 50% 70% / 0.15);
+  }
+}
+
+/* Keyframe Animations */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-15px);
+  }
+}
+
+@keyframes wiggle {
+  0%, 100% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(-5deg);
+  }
+  75% {
+    transform: rotate(5deg);
+  }
+}
+
+@keyframes squish {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(0.9, 1.1);
+  }
+}
+
+@keyframes bounce-in {
+  0% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+  70% {
+    transform: scale(0.9);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes slide-up {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 20px hsl(340 70% 75% / 0.4);
+  }
+  50% {
+    box-shadow: 0 0 40px hsl(340 70% 75% / 0.6), 0 0 60px hsl(45 90% 70% / 0.3);
+  }
+}
+
+@keyframes sparkle {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scale(0.8);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
   }
 }
