@@ -36,16 +36,10 @@ const CuisinesSection = () => {
     <section className="py-20 relative overflow-hidden">
       {/* Section Header */}
       <div className="container mx-auto px-4 text-center mb-16">
-        <h2 
-          className="font-fredoka text-4xl md:text-5xl text-gradient-pink mb-4 opacity-0 animate-slide-up"
-          style={{ animationDelay: '100ms', animationFillMode: 'forwards' }}
-        >
+        <h2 className="font-fredoka text-4xl md:text-5xl text-gradient-pink mb-4">
           Explore World Flavors! 🌍
         </h2>
-        <p 
-          className="font-quicksand text-lg text-muted-foreground max-w-xl mx-auto opacity-0 animate-slide-up"
-          style={{ animationDelay: '200ms', animationFillMode: 'forwards' }}
-        >
+        <p className="font-quicksand text-lg text-muted-foreground max-w-xl mx-auto">
           From dumplings to tacos, we've got your cravings covered. <span className="font-semibold text-primary">Stir-crazy good!</span>
         </p>
       </div>
@@ -56,14 +50,7 @@ const CuisinesSection = () => {
           {cuisines.map((cuisine, index) => (
             <div
               key={cuisine.name}
-              className={cn(
-                'relative group cursor-pointer',
-                'opacity-0 animate-bounce-in'
-              )}
-              style={{ 
-                animationDelay: `${300 + index * 150}ms`,
-                animationFillMode: 'forwards'
-              }}
+              className="relative group cursor-pointer"
               onMouseEnter={() => setHoveredIndex(index)}
               onMouseLeave={() => setHoveredIndex(null)}
             >
