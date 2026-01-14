@@ -46,16 +46,10 @@ const FeaturedSection = () => {
       <div className="container mx-auto px-4 relative z-10">
         {/* Section Header */}
         <div className="text-center mb-16">
-          <h2 
-            className="font-fredoka text-4xl md:text-5xl text-gradient-pink mb-4 opacity-0 animate-slide-up"
-            style={{ animationDelay: '100ms', animationFillMode: 'forwards' }}
-          >
+          <h2 className="font-fredoka text-4xl md:text-5xl text-gradient-pink mb-4">
             Today's Specials! 🌟
           </h2>
-          <p 
-            className="font-quicksand text-lg text-muted-foreground max-w-xl mx-auto opacity-0 animate-slide-up"
-            style={{ animationDelay: '200ms', animationFillMode: 'forwards' }}
-          >
+          <p className="font-quicksand text-lg text-muted-foreground max-w-xl mx-auto">
             Hand-picked goodies that'll make your taste buds dance. <span className="font-semibold text-primary">You butter believe it!</span>
           </p>
         </div>
@@ -68,13 +62,8 @@ const FeaturedSection = () => {
               className={cn(
                 'relative bg-card rounded-3xl p-6 shadow-card',
                 'transition-all duration-500 cursor-pointer',
-                'opacity-0 animate-bounce-in',
                 'hover:shadow-glow-pink hover:-translate-y-3'
               )}
-              style={{ 
-                animationDelay: `${300 + index * 100}ms`,
-                animationFillMode: 'forwards'
-              }}
               onMouseEnter={() => setHoveredIndex(index)}
               onMouseLeave={() => setHoveredIndex(null)}
             >
@@ -118,10 +107,7 @@ const FeaturedSection = () => {
         </div>
 
         {/* View All Button */}
-        <div 
-          className="text-center mt-12 opacity-0 animate-slide-up"
-          style={{ animationDelay: '800ms', animationFillMode: 'forwards' }}
-        >
+        <div className="text-center mt-12">
           <LemonButton size="lg">
             See Full Menu 🍽️
           </LemonButton>
