@@ -9,20 +9,20 @@ const Header = () => {
           <img 
             src={logo} 
             alt="BiteSide Story" 
-            className="h-14 w-auto animate-float"
+            className="h-14 w-auto"
           />
         </div>
 
         {/* Navigation Links */}
-        <ul className="hidden md:flex items-center gap-2">
+        <ul className="hidden md:flex items-center gap-6">
           {[
             { label: 'Home', pun: 'Sweet home!' },
             { label: 'Menu', pun: 'What\'s cooking?' },
             { label: 'Cuisines', pun: 'World tour!' },
             { label: 'About', pun: 'Our story!' },
           ].map((item) => (
-            <li key={item.label} className="pun-trigger relative">
-              <button className="btn-teacup text-sm">
+            <li key={item.label} className="pun-trigger relative group">
+              <button className="font-quicksand font-semibold text-foreground/80 hover:text-primary transition-all duration-300 py-2 px-1 relative after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-gradient-to-r after:from-primary after:to-accent after:scale-x-0 after:origin-left after:transition-transform after:duration-300 group-hover:after:scale-x-100">
                 {item.label}
               </button>
               <span className="pun-tooltip -bottom-10 left-1/2 -translate-x-1/2">
