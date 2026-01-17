@@ -2,6 +2,7 @@ import chineseImg from '@/assets/cuisine-chinese.png';
 import mexicanImg from '@/assets/cuisine-mexican.png';
 import indianImg from '@/assets/cuisine-indian.png';
 import middleEasternImg from '@/assets/cuisine-middle-eastern.png';
+import { Globe, Utensils } from 'lucide-react';
 import { useState } from 'react';
 import { cn } from '@/lib/utils';
 
@@ -35,8 +36,9 @@ const CuisinesSection = () => {
     <section className="py-20 relative overflow-hidden">
       {/* Section Header */}
       <div className="container mx-auto px-4 text-center mb-16">
-        <h2 className="font-fredoka text-4xl md:text-5xl text-gradient-pink mb-4">
-          Explore World Flavors! 🌍
+        <h2 className="font-fredoka text-4xl md:text-5xl text-gradient-pink mb-4 flex items-center justify-center gap-3">
+          Explore World Flavors! 
+          <Globe className="inline-block w-10 h-10 md:w-12 md:h-12 text-accent animate-spin" style={{ animationDuration: '8s' }} />
         </h2>
         <p className="font-quicksand text-lg text-muted-foreground max-w-xl mx-auto">
           From dumplings to tacos, we've got your cravings covered. <span className="font-semibold text-primary">Stir-crazy good!</span>
