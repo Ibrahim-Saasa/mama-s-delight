@@ -61,7 +61,7 @@ const FeaturedSection = () => {
             <div
               key={item.name}
               className={cn(
-                'relative bg-card rounded-3xl p-6 shadow-card',
+                'relative bg-card rounded-3xl p-6 shadow-card flex flex-col',
                 'transition-all duration-500 cursor-pointer',
                 'hover:shadow-glow-pink hover:-translate-y-3'
               )}
@@ -90,12 +90,12 @@ const FeaturedSection = () => {
               <h3 className="font-fredoka text-xl text-center text-foreground mb-2">
                 {item.name}
               </h3>
-              <p className="font-quicksand text-sm text-muted-foreground text-center mb-4">
+              <p className="font-quicksand text-sm text-muted-foreground text-center mb-4 flex-grow">
                 {item.description}
               </p>
 
               {/* Price & CTA */}
-              <div className="flex items-center justify-between mt-auto">
+              <div className="flex items-center justify-between mt-auto pt-4 border-t border-border/50">
                 <span className="font-fredoka text-2xl text-gradient-accent">
                   {item.price}
                 </span>
