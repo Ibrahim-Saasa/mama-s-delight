@@ -1,4 +1,7 @@
-import cuisineIcons from '@/assets/cuisine-icons.png';
+import chineseImg from '@/assets/cuisine-chinese.png';
+import mexicanImg from '@/assets/cuisine-mexican.png';
+import indianImg from '@/assets/cuisine-indian.png';
+import middleEasternImg from '@/assets/cuisine-middle-eastern.png';
 import { useState } from 'react';
 import { cn } from '@/lib/utils';
 
@@ -6,26 +9,22 @@ const cuisines = [
   { 
     name: 'Chinese', 
     pun: 'Wok this way!', 
-    position: 'left-0 top-0',
-    bgPosition: '0% 0%'
+    image: chineseImg
   },
   { 
     name: 'Mexican', 
     pun: 'Taco \'bout flavor!', 
-    position: 'right-0 top-0',
-    bgPosition: '100% 0%'
+    image: mexicanImg
   },
   { 
     name: 'Indian', 
     pun: 'Curry up & order!', 
-    position: 'left-0 bottom-0',
-    bgPosition: '0% 100%'
+    image: indianImg
   },
   { 
     name: 'Middle Eastern', 
     pun: 'Falafel in love!', 
-    position: 'right-0 bottom-0',
-    bgPosition: '100% 100%'
+    image: middleEasternImg
   },
 ];
 
@@ -71,24 +70,18 @@ const CuisinesSection = () => {
               <div 
                 className={cn(
                   'relative w-56 h-56 md:w-64 md:h-64 rounded-3xl overflow-hidden',
-                  'shadow-card transition-all duration-500',
-                  'group-hover:shadow-glow-pink group-hover:scale-105 group-hover:-translate-y-2'
+                  'transition-all duration-500',
+                  'group-hover:scale-105 group-hover:-translate-y-2'
                 )}
               >
-                <div 
-                  className="w-full h-full transition-transform duration-500 group-hover:scale-110"
-                  style={{
-                    backgroundImage: `url(${cuisineIcons})`,
-                    backgroundSize: '200%',
-                    backgroundPosition: cuisine.bgPosition,
-                  }}
+                <img 
+                  src={cuisine.image}
+                  alt={`${cuisine.name} cuisine`}
+                  className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-110"
                 />
-                
-                {/* Hover overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-primary/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               </div>
 
-              {/* Name badge - visible by default since it's in the image */}
+              {/* Name badge on hover */}
               <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-all duration-300 transform group-hover:translate-y-0 translate-y-2">
                 <span className="font-fredoka text-lg font-semibold text-primary-foreground bg-primary px-6 py-2 rounded-full shadow-soft whitespace-nowrap">
                   Order {cuisine.name}!
