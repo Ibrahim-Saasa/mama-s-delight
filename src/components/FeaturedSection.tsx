@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { cn } from '@/lib/utils';
 import LemonButton from './LemonButton';
+import { Sparkles } from 'lucide-react';
 
 const featuredItems = [
   {
@@ -46,8 +47,8 @@ const FeaturedSection = () => {
       <div className="container mx-auto px-4 relative z-10">
         {/* Section Header */}
         <div className="text-center mb-16">
-          <h2 className="font-fredoka text-4xl md:text-5xl text-gradient-pink mb-4">
-            Today's Specials! 🌟
+          <h2 className="font-fredoka text-4xl md:text-5xl text-gradient-pink mb-4 flex items-center justify-center gap-3">
+            Today's Specials! <Sparkles className="w-10 h-10 text-accent animate-pulse" />
           </h2>
           <p className="font-quicksand text-lg text-muted-foreground max-w-xl mx-auto">
             Hand-picked goodies that'll make your taste buds dance. <span className="font-semibold text-primary">You butter believe it!</span>
