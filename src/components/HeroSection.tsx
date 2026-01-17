@@ -1,30 +1,14 @@
-import { useEffect, useState } from 'react';
 import heroImage from '@/assets/hero-image.png';
 
 const HeroSection = () => {
-  const [scrollY, setScrollY] = useState(0);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrollY(window.scrollY);
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Hero Image Background with Parallax */}
+      {/* Hero Image Background */}
       <div className="absolute inset-0 z-0">
         <img 
           src={heroImage} 
           alt="Delicious homemade treats" 
           className="w-full h-full object-cover"
-          style={{
-            transform: `translateY(${scrollY * 0.4}px) scale(1.1)`,
-            transition: 'transform 0.1s ease-out',
-          }}
         />
         <div className="absolute inset-0 bg-gradient-to-b from-background/30 via-transparent to-transparent" />
       </div>
