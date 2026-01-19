@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import LemonButton from './LemonButton';
 import { cn } from '@/lib/utils';
+import { Mail } from 'lucide-react';
 
 const NewsletterSection = () => {
   const [email, setEmail] = useState('');
@@ -30,7 +31,7 @@ const NewsletterSection = () => {
         >
           {/* Header */}
           <div className="mb-8">
-            <span className="text-6xl mb-4 block animate-float">💌</span>
+            <Mail className="w-16 h-16 mb-4 mx-auto text-primary animate-float" strokeWidth={1.5} />
             <h2 
               className="font-fredoka text-3xl md:text-4xl text-gradient-pink mb-3 opacity-0 animate-slide-up"
               style={{ animationDelay: '100ms', animationFillMode: 'forwards' }}
