@@ -50,7 +50,7 @@ const NewsletterSection = () => {
           {/* Form */}
           <form 
             onSubmit={handleSubmit}
-            className="flex flex-col sm:flex-row gap-4 items-center justify-center opacity-0 animate-bounce-in"
+            className="flex flex-col sm:flex-row gap-4 items-center justify-center animate-fade-in"
             style={{ animationDelay: '400ms', animationFillMode: 'forwards' }}
           >
             <input
@@ -60,10 +60,11 @@ const NewsletterSection = () => {
               placeholder="your.email@yummy.com"
               className={cn(
                 'w-full sm:w-80 px-6 py-4 rounded-full',
-                'bg-background border-2 border-primary/30',
-                'font-quicksand text-foreground placeholder:text-muted-foreground',
+                'bg-card border-2 border-primary/40',
+                'font-quicksand text-foreground placeholder:text-muted-foreground/70',
                 'focus:outline-none focus:border-primary focus:ring-4 focus:ring-primary/20',
-                'transition-all duration-300'
+                'transition-all duration-300',
+                'shadow-soft'
               )}
               required
             />
