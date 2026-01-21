@@ -1,7 +1,9 @@
-import { useState } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { cn } from '@/lib/utils';
 import LemonButton from './LemonButton';
-import { Sparkles } from 'lucide-react';
+import { Sparkles, ChevronLeft, ChevronRight } from 'lucide-react';
+import useEmblaCarousel from 'embla-carousel-react';
+import Autoplay from 'embla-carousel-autoplay';
 
 const featuredItems = [
   {
@@ -32,10 +34,60 @@ const featuredItems = [
     price: '$14.99',
     emoji: '🥟',
   },
+  {
+    name: 'Berry Bliss Smoothie',
+    description: 'A burst of berries blended to perfection!',
+    pun: 'Berry nice to meet you!',
+    price: '$8.99',
+    emoji: '🍓',
+  },
+  {
+    name: 'Honey Toast',
+    description: 'Crispy bread drizzled with golden honey goodness.',
+    pun: 'Honey, I\'m home!',
+    price: '$9.99',
+    emoji: '🍯',
+  },
 ];
 
 const FeaturedSection = () => {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const [selectedIndex, setSelectedIndex] = useState(0);
+
+  const [emblaRef, emblaApi] = useEmblaCarousel(
+    { 
+      loop: true, 
+      align: 'start',
+      slidesToScroll: 1,
+      breakpoints: {
+        '(min-width: 768px)': { slidesToScroll: 2 },
+        '(min-width: 1024px)': { slidesToScroll: 1 },
+      }
+    },
+    [Autoplay({ delay: 4000, stopOnInteraction: false, stopOnMouseEnter: true })]
+  );
+
+  const scrollPrev = useCallback(() => {
+    if (emblaApi) emblaApi.scrollPrev();
+  }, [emblaApi]);
+
+  const scrollNext = useCallback(() => {
+    if (emblaApi) emblaApi.scrollNext();
+  }, [emblaApi]);
+
+  const onSelect = useCallback(() => {
+    if (!emblaApi) return;
+    setSelectedIndex(emblaApi.selectedScrollSnap());
+  }, [emblaApi]);
+
+  useEffect(() => {
+    if (!emblaApi) return;
+    onSelect();
+    emblaApi.on('select', onSelect);
+    return () => {
+      emblaApi.off('select', onSelect);
+    };
+  }, [emblaApi, onSelect]);
 
   return (
     <section className="py-20 bg-gradient-card relative overflow-hidden">
@@ -46,7 +98,7 @@ const FeaturedSection = () => {
 
       <div className="container mx-auto px-4 relative z-10">
         {/* Section Header */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-12">
           <h2 className="font-fredoka text-4xl md:text-5xl text-gradient-pink mb-4 flex items-center justify-center gap-3">
             Today's Specials! <Sparkles className="w-10 h-10 text-accent animate-pulse" />
           </h2>
@@ -55,55 +107,96 @@ const FeaturedSection = () => {
           </p>
         </div>
 
-        {/* Featured Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {featuredItems.map((item, index) => (
-            <div
-              key={item.name}
-              className={cn(
-                'relative bg-card rounded-3xl p-6 shadow-card flex flex-col',
-                'transition-all duration-500 cursor-pointer',
-                'hover:shadow-glow-pink hover:-translate-y-3'
-              )}
-              onMouseEnter={() => setHoveredIndex(index)}
-              onMouseLeave={() => setHoveredIndex(null)}
-            >
-              {/* Pun tooltip */}
+        {/* Carousel Navigation */}
+        <div className="flex items-center justify-end gap-2 mb-6">
+          <button
+            onClick={scrollPrev}
+            className="p-3 rounded-full bg-card shadow-soft border border-primary/20 hover:bg-primary/10 hover:shadow-glow-pink transition-all duration-300 group"
+            aria-label="Previous items"
+          >
+            <ChevronLeft className="w-5 h-5 text-primary group-hover:scale-110 transition-transform" />
+          </button>
+          <button
+            onClick={scrollNext}
+            className="p-3 rounded-full bg-card shadow-soft border border-primary/20 hover:bg-primary/10 hover:shadow-glow-pink transition-all duration-300 group"
+            aria-label="Next items"
+          >
+            <ChevronRight className="w-5 h-5 text-primary group-hover:scale-110 transition-transform" />
+          </button>
+        </div>
+
+        {/* Featured Carousel */}
+        <div className="overflow-hidden" ref={emblaRef}>
+          <div className="flex gap-6 touch-pan-y">
+            {featuredItems.map((item, index) => (
               <div
-                className={cn(
-                  'absolute -top-10 left-1/2 -translate-x-1/2 px-4 py-2 rounded-full',
-                  'font-fredoka text-sm whitespace-nowrap z-20',
-                  'bg-accent text-accent-foreground shadow-glow-yellow',
-                  'transition-all duration-300 transform',
-                  hoveredIndex === index ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2'
-                )}
+                key={item.name}
+                className="flex-[0_0_85%] min-w-0 sm:flex-[0_0_45%] lg:flex-[0_0_23%]"
               >
-                {item.pun} ✨
-              </div>
+                <div
+                  className={cn(
+                    'relative bg-card rounded-3xl p-6 shadow-card flex flex-col h-full',
+                    'transition-all duration-500 cursor-pointer',
+                    'hover:shadow-glow-pink hover:-translate-y-3'
+                  )}
+                  onMouseEnter={() => setHoveredIndex(index)}
+                  onMouseLeave={() => setHoveredIndex(null)}
+                >
+                  {/* Pun tooltip */}
+                  <div
+                    className={cn(
+                      'absolute -top-10 left-1/2 -translate-x-1/2 px-4 py-2 rounded-full',
+                      'font-fredoka text-sm whitespace-nowrap z-20',
+                      'bg-accent text-accent-foreground shadow-glow-yellow',
+                      'transition-all duration-300 transform',
+                      hoveredIndex === index ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2'
+                    )}
+                  >
+                    {item.pun} ✨
+                  </div>
 
-              {/* Emoji Icon */}
-              <div className="text-6xl mb-4 text-center animate-float" style={{ animationDelay: `${index * 200}ms` }}>
-                {item.emoji}
-              </div>
+                  {/* Emoji Icon */}
+                  <div className="text-6xl mb-4 text-center animate-float" style={{ animationDelay: `${index * 200}ms` }}>
+                    {item.emoji}
+                  </div>
 
-              {/* Content */}
-              <h3 className="font-fredoka text-xl text-center text-foreground mb-2">
-                {item.name}
-              </h3>
-              <p className="font-quicksand text-sm text-muted-foreground text-center mb-4 flex-grow">
-                {item.description}
-              </p>
+                  {/* Content */}
+                  <h3 className="font-fredoka text-xl text-center text-foreground mb-2">
+                    {item.name}
+                  </h3>
+                  <p className="font-quicksand text-sm text-muted-foreground text-center mb-4 flex-grow">
+                    {item.description}
+                  </p>
 
-              {/* Price & CTA */}
-              <div className="flex items-center justify-between mt-auto pt-4 border-t border-border/50">
-                <span className="font-fredoka text-2xl text-gradient-accent">
-                  {item.price}
-                </span>
-                <button className="btn-teacup text-sm px-4 py-2">
-                  Add 🛒
-                </button>
+                  {/* Price & CTA */}
+                  <div className="flex items-center justify-between mt-auto pt-4 border-t border-border/50">
+                    <span className="font-fredoka text-2xl text-gradient-accent">
+                      {item.price}
+                    </span>
+                    <button className="btn-teacup text-sm px-4 py-2">
+                      Add 🛒
+                    </button>
+                  </div>
+                </div>
               </div>
-            </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Dot indicators */}
+        <div className="flex justify-center gap-2 mt-8">
+          {featuredItems.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => emblaApi?.scrollTo(index)}
+              className={cn(
+                'w-3 h-3 rounded-full transition-all duration-300',
+                selectedIndex === index 
+                  ? 'bg-primary w-8 shadow-glow-pink' 
+                  : 'bg-primary/30 hover:bg-primary/50'
+              )}
+              aria-label={`Go to slide ${index + 1}`}
+            />
           ))}
         </div>
 
