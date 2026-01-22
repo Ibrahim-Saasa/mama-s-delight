@@ -126,18 +126,18 @@ const FeaturedSection = () => {
         </div>
 
         {/* Featured Carousel */}
-        <div className="overflow-hidden" ref={emblaRef}>
-          <div className="flex gap-6 touch-pan-y">
+        <div className="overflow-visible py-16" ref={emblaRef}>
+          <div className="flex touch-pan-y -ml-6">
             {featuredItems.map((item, index) => (
               <div
                 key={item.name}
-                className="flex-[0_0_85%] min-w-0 sm:flex-[0_0_45%] lg:flex-[0_0_23%]"
+                className="flex-[0_0_85%] min-w-0 sm:flex-[0_0_45%] lg:flex-[0_0_25%] pl-6"
               >
                 <div
                   className={cn(
                     'relative bg-card rounded-3xl p-6 shadow-card flex flex-col h-full',
                     'transition-all duration-500 cursor-pointer',
-                    'hover:shadow-glow-pink hover:-translate-y-3'
+                    'hover:shadow-glow-pink hover:-translate-y-3 hover:scale-[1.02]'
                   )}
                   onMouseEnter={() => setHoveredIndex(index)}
                   onMouseLeave={() => setHoveredIndex(null)}
@@ -145,7 +145,7 @@ const FeaturedSection = () => {
                   {/* Pun tooltip */}
                   <div
                     className={cn(
-                      'absolute -top-10 left-1/2 -translate-x-1/2 px-4 py-2 rounded-full',
+                      'absolute -top-12 left-1/2 -translate-x-1/2 px-4 py-2 rounded-full',
                       'font-fredoka text-sm whitespace-nowrap z-20',
                       'bg-accent text-accent-foreground shadow-glow-yellow',
                       'transition-all duration-300 transform',
