@@ -59,7 +59,7 @@ const MenuItemCard = ({ name, description, price, emoji, isSpicy, isVegetarian }
     <div
       className={cn(
         'relative bg-card rounded-3xl p-5 shadow-card overflow-visible',
-        'transition-all duration-500 cursor-pointer',
+        'transition-all duration-500 cursor-pointer flex flex-col h-full',
         'hover:shadow-glow-pink hover:-translate-y-2 hover:scale-[1.02]',
         'group'
       )}
@@ -97,11 +97,11 @@ const MenuItemCard = ({ name, description, price, emoji, isSpicy, isVegetarian }
       </div>
 
       {/* Content */}
-      <div className="text-center">
-        <h3 className="font-fredoka text-lg text-foreground mb-1 group-hover:text-primary transition-colors">
+      <div className="flex flex-col flex-1">
+        <h3 className="font-fredoka text-lg text-foreground mb-1 text-center group-hover:text-primary transition-colors">
           {name}
         </h3>
-        <p className="font-quicksand text-sm text-muted-foreground mb-3 line-clamp-2">
+        <p className="font-quicksand text-sm text-muted-foreground mb-3 line-clamp-2 text-center">
           {description}
         </p>
 
@@ -119,10 +119,13 @@ const MenuItemCard = ({ name, description, price, emoji, isSpicy, isVegetarian }
           )}
         </div>
 
-        {/* Price & Add Button */}
-        <div className="flex items-center justify-between">
+        {/* Spacer to push price/button to bottom */}
+        <div className="flex-1" />
+
+        {/* Price & Add Button - Fixed at bottom */}
+        <div className="flex items-center justify-between mt-auto pt-2 border-t border-border/30">
           <span className="font-fredoka text-xl text-primary">{price}</span>
-          <button className="btn-cupcake text-xs px-3 py-1.5 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+          <button className="btn-cupcake text-xs px-3 py-1.5">
             Add 🧁
           </button>
         </div>
