@@ -2,29 +2,19 @@ import heroImage from '@/assets/hero-image.png';
 import FloatingElements from './FloatingElements';
 import SparkleParticles from './SparkleParticles';
 import { Cake, Coffee, Sparkles } from 'lucide-react';
-import { useEffect, useState } from 'react';
 
 const HeroSection = () => {
-  const [scrollY, setScrollY] = useState(0);
-
-  useEffect(() => {
-    const handleScroll = () => setScrollY(window.scrollY);
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Hero Image Background with Parallax */}
-      <div 
-        className="absolute inset-0 z-0"
-        style={{ transform: `translateY(${scrollY * 0.5}px)` }}
-      >
+      {/* Hero Image Background */}
+      <div className="absolute inset-0 z-0">
         <img 
           src={heroImage} 
           alt="Delicious homemade treats" 
-          className="w-full h-full object-cover scale-110"
+          className="w-full h-full object-cover"
         />
+        {/* Animated gradient color shift overlay */}
+        <div className="absolute inset-0 bg-gradient-color-shift opacity-40" />
         <div className="absolute inset-0 bg-gradient-to-b from-background/40 via-transparent to-transparent" />
       </div>
 
@@ -35,10 +25,7 @@ const HeroSection = () => {
       <FloatingElements />
 
       {/* Hero Content - Centered */}
-      <div 
-        className="relative z-30 container mx-auto px-4 text-center flex flex-col items-center justify-center"
-        style={{ transform: `translateY(${scrollY * 0.2}px)` }}
-      >
+      <div className="relative z-30 container mx-auto px-4 text-center flex flex-col items-center justify-center">
         {/* Content Box with backdrop */}
         <div className="bg-background/80 backdrop-blur-md rounded-[3rem] p-8 md:p-12 max-w-3xl mx-auto shadow-card border border-primary/20">
           {/* Animated Tagline */}
