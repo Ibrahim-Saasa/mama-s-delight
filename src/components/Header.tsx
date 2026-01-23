@@ -53,13 +53,13 @@ const Header = () => {
         {/* Auth Links */}
         <div className="flex items-center gap-4">
           <Link 
-            to="/sign-in" 
+            to="/auth" 
             className="font-quicksand font-semibold text-foreground/80 hover:text-primary transition-colors"
           >
             Sign In
           </Link>
           <Link 
-            to="/sign-up" 
+            to="/auth" 
             className="font-quicksand font-semibold px-4 py-2 rounded-full bg-primary text-primary-foreground hover:bg-primary/90 transition-colors"
           >
             Sign Up
