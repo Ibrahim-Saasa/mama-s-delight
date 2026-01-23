@@ -58,7 +58,7 @@ const MenuItemCard = ({ name, description, price, emoji, isSpicy, isVegetarian }
   return (
     <div
       className={cn(
-        'relative bg-card rounded-3xl p-5 shadow-card overflow-visible',
+        'relative bg-card rounded-3xl p-5 pb-6 shadow-card overflow-visible',
         'transition-all duration-500 cursor-pointer flex flex-col h-full',
         'hover:shadow-glow-pink hover:-translate-y-2 hover:scale-[1.02]',
         'group'

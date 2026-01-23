@@ -82,8 +82,8 @@ const Menu = () => {
         <main className="pt-28 pb-20">
           {/* Page Header */}
           <div className="container mx-auto px-4 text-center mb-12">
-            <h1 className="font-fredoka text-5xl md:text-6xl text-shimmer mb-4">
-              Our Yummy Menu! 🍽️
+            <h1 className="font-fredoka text-5xl md:text-6xl text-shimmer mb-4 flex items-center justify-center gap-3">
+              Our Yummy Menu! <Soup className="inline-block w-12 h-12 text-primary" />
             </h1>
             <p className="font-quicksand text-lg text-muted-foreground max-w-2xl mx-auto">
               From sizzling stir-fries to tantalizing tacos, every dish is made with love and a sprinkle of magic! ✨
