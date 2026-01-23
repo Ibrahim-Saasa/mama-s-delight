@@ -125,7 +125,7 @@ const MenuItemCard = ({ name, description, price, emoji, isSpicy, isVegetarian }
         {/* Price & Add Button - Fixed at bottom */}
         <div className="flex items-center justify-between mt-auto pt-2 border-t border-border/30">
           <span className="font-fredoka text-xl text-primary">{price}</span>
-          <button className="btn-cupcake text-xs px-3 py-1.5">
+          <button className="btn-cupcake text-xs px-4 py-2 whitespace-nowrap">
             Add 🧁
           </button>
         </div>

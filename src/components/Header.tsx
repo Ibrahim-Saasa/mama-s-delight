@@ -50,10 +50,21 @@ const Header = () => {
           ))}
         </ul>
 
-        {/* CTA Button */}
-        <button className="btn-lemon text-sm px-5 py-2">
-          Order Now 🍋
-        </button>
+        {/* Auth Links */}
+        <div className="flex items-center gap-4">
+          <Link 
+            to="/sign-in" 
+            className="font-quicksand font-semibold text-foreground/80 hover:text-primary transition-colors"
+          >
+            Sign In
+          </Link>
+          <Link 
+            to="/sign-up" 
+            className="font-quicksand font-semibold px-4 py-2 rounded-full bg-primary text-primary-foreground hover:bg-primary/90 transition-colors"
+          >
+            Sign Up
+          </Link>
+        </div>
       </nav>
     </header>
   );
