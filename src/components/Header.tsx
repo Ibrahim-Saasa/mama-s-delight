@@ -12,6 +12,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { LogOut, User } from 'lucide-react';
+import CartSheet from './CartSheet';
 
 const Header = () => {
   const location = useLocation();
@@ -62,8 +63,10 @@ const Header = () => {
           ))}
         </ul>
 
-        {/* Auth Links */}
-        <div className="flex items-center gap-4">
+        {/* Cart & Auth Links */}
+        <div className="flex items-center gap-3">
+          <CartSheet />
+          
           {user ? (
             <DropdownMenu>
               <DropdownMenuTrigger asChild>

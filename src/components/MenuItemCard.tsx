@@ -1,6 +1,7 @@
 import { useState, useCallback } from 'react';
 import { cn } from '@/lib/utils';
 import { Sparkles } from 'lucide-react';
+import { useCart } from '@/hooks/useCart';
 
 interface Sprinkle {
   id: number;
@@ -12,9 +13,10 @@ interface Sprinkle {
 }
 
 interface MenuItemCardProps {
+  id: string;
   name: string;
   description: string;
-  price: string;
+  price: number;
   emoji: string;
   isSpicy?: boolean;
   isVegetarian?: boolean;
@@ -29,7 +31,8 @@ const sprinkleColors = [
   'hsl(45 90% 65%)',
 ];
 
-const MenuItemCard = ({ name, description, price, emoji, isSpicy, isVegetarian }: MenuItemCardProps) => {
+const MenuItemCard = ({ id, name, description, price, emoji, isSpicy, isVegetarian }: MenuItemCardProps) => {
+  const { addToCart } = useCart();
   const [isHovered, setIsHovered] = useState(false);
   const [sprinkles, setSprinkles] = useState<Sprinkle[]>([]);
 
@@ -124,8 +127,11 @@ const MenuItemCard = ({ name, description, price, emoji, isSpicy, isVegetarian }
 
         {/* Price & Add Button - Fixed at bottom */}
         <div className="flex items-center justify-between mt-auto pt-2 border-t border-border/30">
-          <span className="font-fredoka text-xl text-primary">{price}</span>
-          <button className="btn-cupcake text-xs px-4 py-2 whitespace-nowrap">
+          <span className="font-fredoka text-xl text-primary">${price.toFixed(2)}</span>
+          <button 
+            className="btn-cupcake text-xs px-4 py-2 whitespace-nowrap"
+            onClick={() => addToCart(id)}
+          >
             Add 🧁
           </button>
         </div>
