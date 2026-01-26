@@ -1,15 +1,7 @@
 import { cn } from '@/lib/utils';
 import MenuItemCard from './MenuItemCard';
 import { LucideIcon } from 'lucide-react';
-
-interface MenuItem {
-  name: string;
-  description: string;
-  price: string;
-  emoji: string;
-  isSpicy?: boolean;
-  isVegetarian?: boolean;
-}
+import { MenuItem } from '@/hooks/useMenuItems';
 
 interface MenuSectionProps {
   title: string;
@@ -55,7 +47,16 @@ const MenuSection = ({ title, subtitle, icon: Icon, items, accentColor = 'pink' 
       {/* Items Grid */}
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
         {items.map((item) => (
-          <MenuItemCard key={item.name} {...item} />
+          <MenuItemCard 
+            key={item.id} 
+            id={item.id}
+            name={item.name}
+            description={item.description}
+            price={item.price}
+            emoji={item.emoji}
+            isSpicy={item.is_spicy}
+            isVegetarian={item.is_vegetarian}
+          />
         ))}
       </div>
     </div>
