@@ -2,6 +2,7 @@ import { Link, useLocation } from 'react-router-dom';
 import logo from '@/assets/logo.png';
 import { cn } from '@/lib/utils';
 import { useAuth } from '@/hooks/useAuth';
+import { useProfile } from '@/hooks/useProfile';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import {
