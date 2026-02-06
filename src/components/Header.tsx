@@ -74,9 +74,9 @@ const Header = () => {
               <DropdownMenuTrigger asChild>
                 <Button variant="ghost" className="relative h-10 w-10 rounded-full">
                   <Avatar className="h-10 w-10 border-2 border-primary/20">
-                    <AvatarImage src={undefined} alt={user.email || 'User'} />
+                    <AvatarImage src={profile?.avatar_url ?? undefined} alt={user.email || 'User'} />
                     <AvatarFallback className="bg-primary/10 text-primary font-semibold">
-                      {user.email?.charAt(0).toUpperCase() || 'U'}
+                      {profile?.username?.charAt(0).toUpperCase() || user.email?.charAt(0).toUpperCase() || 'U'}
                     </AvatarFallback>
                   </Avatar>
                 </Button>
