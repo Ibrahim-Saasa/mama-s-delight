@@ -18,6 +18,7 @@ import CartSheet from './CartSheet';
 const Header = () => {
   const location = useLocation();
   const { user, signOut } = useAuth();
+  const { profile } = useProfile();
 
   const navItems = [
     { label: 'Home', pun: 'Sweet home!', path: '/' },
