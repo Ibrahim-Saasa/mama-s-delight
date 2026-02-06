@@ -4,7 +4,7 @@ import { useAuth } from '@/hooks/useAuth';
 import backgroundPattern from '@/assets/background-pattern.png';
 import logo from '@/assets/logo.png';
 import { Link } from 'react-router-dom';
-import { Mail, Lock, User, ArrowRight, Sparkles } from 'lucide-react';
+import { Mail, Lock, User, ArrowRight, Sparkles, PartyPopper, UtensilsCrossed } from 'lucide-react';
 import { z } from 'zod';
 import { toast } from 'sonner';
 
