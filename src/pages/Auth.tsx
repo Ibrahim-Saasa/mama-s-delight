@@ -4,7 +4,7 @@ import { useAuth } from '@/hooks/useAuth';
 import backgroundPattern from '@/assets/background-pattern.png';
 import logo from '@/assets/logo.png';
 import { Link } from 'react-router-dom';
-import { Mail, Lock, User, ArrowRight, Sparkles } from 'lucide-react';
+import { Mail, Lock, User, ArrowRight, Sparkles, PartyPopper, UtensilsCrossed } from 'lucide-react';
 import { z } from 'zod';
 import { toast } from 'sonner';
 
@@ -120,8 +120,8 @@ const Auth = () => {
           
           {/* Header */}
           <div className="text-center mb-8">
-            <h1 className="font-fredoka text-3xl text-shimmer mb-2">
-              {isSignUp ? 'Join the Feast! 🎉' : 'Welcome Back! 🍴'}
+            <h1 className="font-fredoka text-3xl text-shimmer mb-2 flex items-center justify-center gap-2">
+              {isSignUp ? (<>Join the Feast! <PartyPopper className="w-7 h-7 inline-block text-accent" /></>) : (<>Welcome Back! <UtensilsCrossed className="w-7 h-7 inline-block text-accent" /></>)}
             </h1>
             <p className="font-quicksand text-muted-foreground">
               {isSignUp 
