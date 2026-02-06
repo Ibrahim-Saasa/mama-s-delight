@@ -2,6 +2,7 @@ import { Link, useLocation } from 'react-router-dom';
 import logo from '@/assets/logo.png';
 import { cn } from '@/lib/utils';
 import { useAuth } from '@/hooks/useAuth';
+import { useProfile } from '@/hooks/useProfile';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import {
@@ -17,6 +18,7 @@ import CartSheet from './CartSheet';
 const Header = () => {
   const location = useLocation();
   const { user, signOut } = useAuth();
+  const { profile } = useProfile();
 
   const navItems = [
     { label: 'Home', pun: 'Sweet home!', path: '/' },
@@ -72,9 +74,9 @@ const Header = () => {
               <DropdownMenuTrigger asChild>
                 <Button variant="ghost" className="relative h-10 w-10 rounded-full">
                   <Avatar className="h-10 w-10 border-2 border-primary/20">
-                    <AvatarImage src={undefined} alt={user.email || 'User'} />
+                    <AvatarImage src={profile?.avatar_url ?? undefined} alt={user.email || 'User'} />
                     <AvatarFallback className="bg-primary/10 text-primary font-semibold">
-                      {user.email?.charAt(0).toUpperCase() || 'U'}
+                      {profile?.username?.charAt(0).toUpperCase() || user.email?.charAt(0).toUpperCase() || 'U'}
                     </AvatarFallback>
                   </Avatar>
                 </Button>
@@ -83,7 +85,7 @@ const Header = () => {
                 <div className="flex items-center gap-2 p-2">
                   <Avatar className="h-8 w-8">
                     <AvatarFallback className="bg-primary/10 text-primary text-sm">
-                      {user.email?.charAt(0).toUpperCase() || 'U'}
+                      {profile?.username?.charAt(0).toUpperCase() || user.email?.charAt(0).toUpperCase() || 'U'}
                     </AvatarFallback>
                   </Avatar>
                   <div className="flex flex-col space-y-1">
