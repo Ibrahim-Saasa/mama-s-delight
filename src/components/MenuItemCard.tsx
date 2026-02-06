@@ -132,7 +132,7 @@ const MenuItemCard = ({ id, name, description, price, emoji, isSpicy, isVegetari
             className="btn-cupcake text-xs px-4 py-2 whitespace-nowrap"
             onClick={() => addToCart(id)}
           >
-            Add 🧁
+            🛒
           </button>
         </div>
       </div>
