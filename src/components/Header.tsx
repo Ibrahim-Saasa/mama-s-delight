@@ -85,7 +85,7 @@ const Header = () => {
                 <div className="flex items-center gap-2 p-2">
                   <Avatar className="h-8 w-8">
                     <AvatarFallback className="bg-primary/10 text-primary text-sm">
-                      {user.email?.charAt(0).toUpperCase() || 'U'}
+                      {profile?.username?.charAt(0).toUpperCase() || user.email?.charAt(0).toUpperCase() || 'U'}
                     </AvatarFallback>
                   </Avatar>
                   <div className="flex flex-col space-y-1">
