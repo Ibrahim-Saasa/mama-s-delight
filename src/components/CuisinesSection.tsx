@@ -1,33 +1,8 @@
-import chineseImg from '@/assets/cuisine-chinese.png';
-import mexicanImg from '@/assets/cuisine-mexican.png';
-import indianImg from '@/assets/cuisine-indian.png';
-import middleEasternImg from '@/assets/cuisine-middle-eastern.png';
-import { Globe, Utensils } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { Globe } from 'lucide-react';
 import { useState } from 'react';
 import { cn } from '@/lib/utils';
-
-const cuisines = [
-  { 
-    name: 'Chinese', 
-    pun: 'Wok this way!', 
-    image: chineseImg
-  },
-  { 
-    name: 'Mexican', 
-    pun: 'Taco \'bout flavor!', 
-    image: mexicanImg
-  },
-  { 
-    name: 'Indian', 
-    pun: 'Curry up & order!', 
-    image: indianImg
-  },
-  { 
-    name: 'Middle Eastern', 
-    pun: 'Falafel in love!', 
-    image: middleEasternImg
-  },
-];
+import { cuisineDetails } from '@/data/cuisineDetails';
 
 const CuisinesSection = () => {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
@@ -48,10 +23,11 @@ const CuisinesSection = () => {
       {/* Cuisine Grid */}
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 justify-items-center">
-          {cuisines.map((cuisine, index) => (
-            <div
-              key={cuisine.name}
-              className="relative group cursor-pointer"
+          {cuisineDetails.map((cuisine, index) => (
+            <Link
+              key={cuisine.slug}
+              to={`/cuisine/${cuisine.slug}`}
+              className="relative group cursor-pointer block"
               onMouseEnter={() => setHoveredIndex(index)}
               onMouseLeave={() => setHoveredIndex(null)}
             >
@@ -65,7 +41,7 @@ const CuisinesSection = () => {
                   hoveredIndex === index ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-2 scale-90'
                 )}
               >
-                {cuisine.pun} ✨
+                {cuisine.tagline} ✨
               </div>
 
               {/* Cuisine Image Card */}
@@ -83,13 +59,18 @@ const CuisinesSection = () => {
                 />
               </div>
 
+              {/* Quick Fun Fact */}
+              <p className="font-quicksand text-sm text-muted-foreground text-center mt-3 max-w-56 md:max-w-64 mx-auto leading-snug">
+                {cuisine.quickFact}
+              </p>
+
               {/* Name badge on hover */}
-              <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-all duration-300 transform group-hover:translate-y-0 translate-y-2">
+              <div className="absolute bottom-8 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-all duration-300 transform group-hover:translate-y-0 translate-y-2">
                 <span className="font-fredoka text-lg font-semibold text-primary-foreground bg-primary px-6 py-2 rounded-full shadow-soft whitespace-nowrap">
-                  Order {cuisine.name}!
+                  Explore {cuisine.name}!
                 </span>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       </div>
