@@ -4,13 +4,18 @@ import backgroundPattern from '@/assets/background-pattern.png';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { Card, CardContent } from '@/components/ui/card';
-import { ArrowLeft, Clock, Utensils, Flame, Globe, Heart, Leaf, Coffee, Sparkles, Users, Award, Calendar, ChefHat, Wheat, type LucideIcon } from 'lucide-react';
+import { ArrowLeft, Clock } from 'lucide-react';
+import InfographicSection from '@/components/cuisine/InfographicSection';
+import TimelineSection from '@/components/cuisine/TimelineSection';
+import IngredientSpotlight from '@/components/cuisine/IngredientSpotlight';
+import EtiquetteTips from '@/components/cuisine/EtiquetteTips';
 import { cn } from '@/lib/utils';
+import { Clock as ClockIcon, Utensils, Flame, Globe, Heart, Leaf, Coffee, Sparkles, Users, Award, Calendar, ChefHat, Wheat, type LucideIcon } from 'lucide-react';
 
 const iconMap: Record<string, LucideIcon> = {
-  Clock, Utensils, Flame, Globe, Heart, Leaf, Coffee, Sparkles, Users, Award, Calendar, ChefHat, Wheat,
-  Candy: Sparkles, // fallback
-  Pepper: Flame,   // fallback
+  Clock: ClockIcon, Utensils, Flame, Globe, Heart, Leaf, Coffee, Sparkles, Users, Award, Calendar, ChefHat, Wheat,
+  Candy: Sparkles,
+  Pepper: Flame,
 };
 
 const CuisineDetail = () => {
@@ -76,6 +81,9 @@ const CuisineDetail = () => {
             </div>
           </section>
 
+          {/* Infographic Stats */}
+          <InfographicSection stats={cuisine.infographicStats} cuisineName={cuisine.name} />
+
           {/* History Section */}
           <section className="container mx-auto px-4 mb-16">
             <Card className="bg-card/80 backdrop-blur-sm border-border/50 shadow-card overflow-hidden">
@@ -90,6 +98,9 @@ const CuisineDetail = () => {
               </CardContent>
             </Card>
           </section>
+
+          {/* Timeline */}
+          <TimelineSection events={cuisine.timeline} />
 
           {/* Fun Facts Grid */}
           <section className="container mx-auto px-4 mb-16">
@@ -123,6 +134,12 @@ const CuisineDetail = () => {
               })}
             </div>
           </section>
+
+          {/* Ingredient Spotlight */}
+          <IngredientSpotlight ingredients={cuisine.ingredients} />
+
+          {/* Etiquette Tips */}
+          <EtiquetteTips tips={cuisine.etiquetteTips} cuisineName={cuisine.name} />
 
           {/* Signature Dishes */}
           <section className="container mx-auto px-4 mb-16">
