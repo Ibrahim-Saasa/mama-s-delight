@@ -33,9 +33,10 @@ const About = () => {
           <section className="container mx-auto px-4 mb-16">
             <div className="text-center mb-12 animate-fade-in" style={{ opacity: 1 }}>
               <span className="inline-block text-4xl mb-3">💕</span>
-              <h1 className="font-fredoka text-4xl md:text-5xl lg:text-6xl mb-4">
+              <h1 className="font-fredoka text-4xl md:text-5xl lg:text-6xl mb-2">
                 <span className="text-gradient-pink">Her Story</span>
               </h1>
+              <p className="font-fredoka text-2xl md:text-3xl text-primary/80 mb-3">Alifiya Saasa</p>
               <p className="font-quicksand text-muted-foreground text-lg max-w-xl mx-auto">
                 A lifetime of love, told through food
               </p>
