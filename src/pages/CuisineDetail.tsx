@@ -88,9 +88,9 @@ const CuisineDetail = () => {
           <section className="container mx-auto px-4 mb-16">
             <Card className="bg-card/80 backdrop-blur-sm border-border/50 shadow-card overflow-hidden">
               <CardContent className="p-8 md:p-12">
-                <h2 className="font-fredoka text-3xl text-gradient-pink mb-6 flex items-center gap-3">
+                <h2 className="font-fredoka text-3xl mb-6 flex items-center gap-3">
                   <Clock className="w-8 h-8 text-primary" />
-                  The Story So Far...
+                  <span className="text-gradient-pink">The Story So Far...</span>
                 </h2>
                 <p className="font-quicksand text-lg leading-relaxed text-foreground/85">
                   {cuisine.history}
@@ -104,8 +104,8 @@ const CuisineDetail = () => {
 
           {/* Fun Facts Grid */}
           <section className="container mx-auto px-4 mb-16">
-            <h2 className="font-fredoka text-3xl text-gradient-pink mb-8 text-center">
-              Did You Know? 🤓
+            <h2 className="font-fredoka text-3xl mb-8 text-center">
+              <span className="text-gradient-pink">Did You Know?</span> 🤓
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {cuisine.funFacts.map((fact, i) => {
@@ -143,8 +143,8 @@ const CuisineDetail = () => {
 
           {/* Signature Dishes */}
           <section className="container mx-auto px-4 mb-16">
-            <h2 className="font-fredoka text-3xl text-gradient-pink mb-8 text-center">
-              Signature Dishes 🍽️
+            <h2 className="font-fredoka text-3xl mb-8 text-center">
+              <span className="text-gradient-pink">Signature Dishes</span> 🍽️
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-3xl mx-auto">
               {cuisine.signatureDishes.map((dish, i) => (
