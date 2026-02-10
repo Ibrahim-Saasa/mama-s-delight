@@ -10,6 +10,7 @@ import Menu from "./pages/Menu";
 import Auth from "./pages/Auth";
 import Profile from "./pages/Profile";
 import CuisineDetail from "./pages/CuisineDetail";
+import About from "./pages/About";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
