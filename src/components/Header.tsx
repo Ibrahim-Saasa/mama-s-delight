@@ -24,7 +24,7 @@ const Header = () => {
     { label: 'Home', pun: 'Sweet home!', path: '/' },
     { label: 'Menu', pun: "What's cooking?", path: '/menu' },
     { label: 'Cuisines', pun: 'World tour!', path: '/#cuisines' },
-    { label: 'About', pun: 'Our story!', path: '/#about' },
+    { label: 'About', pun: 'Our story!', path: '/about' },
   ];
 
   return (
