@@ -143,8 +143,8 @@ const CuisineDetail = () => {
 
           {/* Signature Dishes */}
           <section className="container mx-auto px-4 mb-16">
-            <h2 className="font-fredoka text-3xl text-gradient-pink mb-8 text-center">
-              Signature Dishes 🍽️
+            <h2 className="font-fredoka text-3xl mb-8 text-center">
+              <span className="text-gradient-pink">Signature Dishes</span> 🍽️
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-3xl mx-auto">
               {cuisine.signatureDishes.map((dish, i) => (
