@@ -12,8 +12,8 @@ const IngredientSpotlight = ({ ingredients }: IngredientSpotlightProps) => {
 
   return (
     <section className="container mx-auto px-4 mb-16">
-      <h2 className="font-fredoka text-3xl text-gradient-pink mb-3 text-center">
-        Ingredient Spotlight 🧂
+      <h2 className="font-fredoka text-3xl mb-3 text-center">
+        <span className="text-gradient-pink">Ingredient Spotlight</span> 🧂
       </h2>
       <p className="font-quicksand text-muted-foreground text-center mb-8">
         Tap a card to reveal a fun fact!

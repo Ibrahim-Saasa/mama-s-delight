@@ -14,8 +14,8 @@ interface EtiquetteTipsProps {
 const EtiquetteTips = ({ tips, cuisineName }: EtiquetteTipsProps) => {
   return (
     <section className="container mx-auto px-4 mb-16">
-      <h2 className="font-fredoka text-3xl text-gradient-pink mb-3 text-center">
-        Table Manners 101 🍽️
+      <h2 className="font-fredoka text-3xl mb-3 text-center">
+        <span className="text-gradient-pink">Table Manners 101</span> 🍽️
       </h2>
       <p className="font-quicksand text-muted-foreground text-center mb-8">
         How to dine like a {cuisineName} local

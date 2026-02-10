@@ -14,8 +14,8 @@ interface InfographicSectionProps {
 const InfographicSection = ({ stats, cuisineName }: InfographicSectionProps) => {
   return (
     <section className="container mx-auto px-4 mb-16">
-      <h2 className="font-fredoka text-3xl text-gradient-pink mb-8 text-center">
-        {cuisineName} By The Numbers 📊
+      <h2 className="font-fredoka text-3xl mb-8 text-center">
+        <span className="text-gradient-pink">{cuisineName} By The Numbers</span> 📊
       </h2>
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
         {stats.map((stat, i) => {

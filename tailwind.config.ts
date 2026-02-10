@@ -117,8 +117,8 @@ export default {
         "bounce-in": {
           "0%": { opacity: "0", transform: "scale(0.3)" },
           "50%": { opacity: "1", transform: "scale(1.1)" },
-          "70%": { transform: "scale(0.9)" },
-          "100%": { transform: "scale(1)" },
+          "70%": { opacity: "1", transform: "scale(0.9)" },
+          "100%": { opacity: "1", transform: "scale(1)" },
         },
         "slide-up": {
           "0%": { opacity: "0", transform: "translateY(30px)" },

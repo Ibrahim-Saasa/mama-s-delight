@@ -13,8 +13,8 @@ interface TimelineSectionProps {
 const TimelineSection = ({ events }: TimelineSectionProps) => {
   return (
     <section className="container mx-auto px-4 mb-16">
-      <h2 className="font-fredoka text-3xl text-gradient-pink mb-10 text-center">
-        A Tasty Timeline 📜
+      <h2 className="font-fredoka text-3xl mb-10 text-center">
+        <span className="text-gradient-pink">A Tasty Timeline</span> 📜
       </h2>
       <div className="relative max-w-3xl mx-auto">
         {/* Vertical line */}
