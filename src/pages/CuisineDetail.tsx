@@ -88,9 +88,9 @@ const CuisineDetail = () => {
           <section className="container mx-auto px-4 mb-16">
             <Card className="bg-card/80 backdrop-blur-sm border-border/50 shadow-card overflow-hidden">
               <CardContent className="p-8 md:p-12">
-                <h2 className="font-fredoka text-3xl text-gradient-pink mb-6 flex items-center gap-3">
+                <h2 className="font-fredoka text-3xl mb-6 flex items-center gap-3">
                   <Clock className="w-8 h-8 text-primary" />
-                  The Story So Far...
+                  <span className="text-gradient-pink">The Story So Far...</span>
                 </h2>
                 <p className="font-quicksand text-lg leading-relaxed text-foreground/85">
                   {cuisine.history}
