@@ -104,8 +104,8 @@ const CuisineDetail = () => {
 
           {/* Fun Facts Grid */}
           <section className="container mx-auto px-4 mb-16">
-            <h2 className="font-fredoka text-3xl text-gradient-pink mb-8 text-center">
-              Did You Know? 🤓
+            <h2 className="font-fredoka text-3xl mb-8 text-center">
+              <span className="text-gradient-pink">Did You Know?</span> 🤓
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {cuisine.funFacts.map((fact, i) => {
