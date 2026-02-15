@@ -127,7 +127,7 @@ const MenuItemCard = ({ id, name, description, price, emoji, isSpicy, isVegetari
 
         {/* Price & Add Button - Fixed at bottom */}
         <div className="flex items-center justify-between mt-auto pt-2 border-t border-border/30">
-          <span className="font-fredoka text-xl text-primary">${price.toFixed(2)}</span>
+          <span className="font-fredoka text-xl text-primary">₹{price.toFixed(2)}</span>
           <button 
             className="bg-primary hover:bg-primary/90 text-primary-foreground rounded-full w-9 h-9 flex items-center justify-center text-lg transition-all duration-300 hover:scale-110 active:scale-95 shadow-md"
             onClick={() => addToCart(id)}
