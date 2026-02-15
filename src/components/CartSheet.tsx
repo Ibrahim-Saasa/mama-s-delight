@@ -117,8 +117,8 @@ const CartSheet = () => {
                   >
                     Clear Cart
                   </Button>
-                  <Button className="flex-1 btn-cupcake">
-                    Checkout 🎉
+                  <Button className="flex-1 bg-primary hover:bg-primary/90 text-primary-foreground font-fredoka rounded-full shadow-md">
+                    Checkout <span>🎉</span>
                   </Button>
                 </div>
               </div>
