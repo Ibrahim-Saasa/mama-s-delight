@@ -63,7 +63,7 @@ const CartSheet = () => {
                           {item.menu_item.name}
                         </h4>
                         <p className="text-sm text-primary font-semibold">
-                          ${Number(item.menu_item.price).toFixed(2)}
+                          ₹{Number(item.menu_item.price).toFixed(2)}
                         </p>
                       </div>
                       <Button
@@ -105,7 +105,7 @@ const CartSheet = () => {
                 <div className="flex justify-between items-center">
                   <span className="font-quicksand text-muted-foreground">Total</span>
                   <span className="font-fredoka text-2xl text-primary">
-                    ${cartTotal.toFixed(2)}
+                    ₹{cartTotal.toFixed(2)}
                   </span>
                 </div>
                 
