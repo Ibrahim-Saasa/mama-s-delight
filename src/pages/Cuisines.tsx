@@ -38,8 +38,8 @@ const FunFactsCarousel = () => {
   return (
     <section className="py-16">
       <div className="container mx-auto px-4 text-center mb-10">
-        <h2 className="font-fredoka text-3xl md:text-4xl text-gradient-pink mb-2">
-          Did You Know? 🤯
+        <h2 className="font-fredoka text-3xl md:text-4xl mb-2">
+          <span className="text-gradient-pink">Did You Know?</span> <span>🤯</span>
         </h2>
         <p className="font-quicksand text-muted-foreground">Fun food facts that'll blow your mind!</p>
       </div>
@@ -100,9 +100,9 @@ const cuisineCompare: Record<string, { spice: string; flavor: string; bestFor: s
 const ComparisonSection = () => (
   <section className="py-16">
     <div className="container mx-auto px-4 text-center mb-10">
-      <h2 className="font-fredoka text-3xl md:text-4xl text-gradient-pink mb-2">
-        Flavor Face-Off! ⚔️
-      </h2>
+        <h2 className="font-fredoka text-3xl md:text-4xl mb-2">
+          <span className="text-gradient-pink">Flavor Face-Off!</span> <span>⚔️</span>
+        </h2>
       <p className="font-quicksand text-muted-foreground">How do our cuisines stack up against each other?</p>
     </div>
 
@@ -222,8 +222,8 @@ const QuizSection = () => {
   return (
     <section className="py-16">
       <div className="container mx-auto px-4 text-center mb-10">
-        <h2 className="font-fredoka text-3xl md:text-4xl text-gradient-pink mb-2">
-          What Should You Eat? 🧠
+        <h2 className="font-fredoka text-3xl md:text-4xl mb-2">
+          <span className="text-gradient-pink">What Should You Eat?</span> <span>🧠</span>
         </h2>
         <p className="font-quicksand text-muted-foreground">Answer 4 quick questions to find your perfect cuisine match!</p>
       </div>
