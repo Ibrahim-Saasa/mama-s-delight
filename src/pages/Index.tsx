@@ -1,6 +1,7 @@
 import backgroundPattern from '@/assets/background-pattern.png';
 import Header from '@/components/Header';
 import HeroSection from '@/components/HeroSection';
+import WeeklySpecialsBanner from '@/components/WeeklySpecialsBanner';
 import CuisinesSection from '@/components/CuisinesSection';
 import FeaturedSection from '@/components/FeaturedSection';
 import NewsletterSection from '@/components/NewsletterSection';
@@ -25,6 +26,7 @@ const Index = () => {
         <Header />
         <main>
           <HeroSection />
+          <WeeklySpecialsBanner />
           <CuisinesSection />
           <FeaturedSection />
           <NewsletterSection />
