@@ -12,6 +12,7 @@ import Profile from "./pages/Profile";
 import CuisineDetail from "./pages/CuisineDetail";
 import About from "./pages/About";
 import Cuisines from "./pages/Cuisines";
+import Checkout from "./pages/Checkout";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
