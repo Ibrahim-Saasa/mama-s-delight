@@ -164,7 +164,7 @@ const WeeklySpecialsBanner = () => {
             </p>
 
             {/* Price in chalk circle */}
-            <div className="inline-block relative">
+            <div className={`inline-block relative transition-all duration-700 delay-[900ms] ${isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-75'}`}>
               <div
                 className="px-6 py-2 rounded-full"
                 style={{
@@ -184,7 +184,7 @@ const WeeklySpecialsBanner = () => {
             </div>
 
             {/* Bottom decorative chalk line */}
-            <div className="mx-auto w-32 h-px mt-6" style={{ background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent)' }} />
+            <div className={`mx-auto h-px mt-6 transition-all duration-1000 delay-[1100ms] ${isVisible ? 'w-32 opacity-100' : 'w-0 opacity-0'}`} style={{ background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent)' }} />
           </div>
         </div>
       </div>
