@@ -3,14 +3,17 @@ import { Button } from '@/components/ui/button';
 import { ShoppingCart, Plus, Minus, Trash2 } from 'lucide-react';
 import { useCart } from '@/hooks/useCart';
 import { useAuth } from '@/hooks/useAuth';
+import { useNavigate } from 'react-router-dom';
 import { cn } from '@/lib/utils';
+import { useState } from 'react';
 
 const CartSheet = () => {
   const { user } = useAuth();
   const { cartItems, cartCount, cartTotal, updateQuantity, removeFromCart, clearCart, loading } = useCart();
-
+  const navigate = useNavigate();
+  const [open, setOpen] = useState(false);
   return (
-    <Sheet>
+    <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger asChild>
         <Button variant="ghost" size="icon" className="relative">
           <ShoppingCart className="h-5 w-5" />
@@ -117,7 +120,13 @@ const CartSheet = () => {
                   >
                     Clear Cart
                   </Button>
-                  <Button className="flex-1 bg-primary hover:bg-primary/90 text-primary-foreground font-fredoka rounded-full shadow-md">
+                  <Button
+                    className="flex-1 bg-primary hover:bg-primary/90 text-primary-foreground font-fredoka rounded-full shadow-md"
+                    onClick={() => {
+                      setOpen(false);
+                      navigate('/checkout');
+                    }}
+                  >
                     Checkout <span>🎉</span>
                   </Button>
                 </div>
