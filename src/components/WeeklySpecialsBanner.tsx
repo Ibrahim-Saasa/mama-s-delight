@@ -116,7 +116,7 @@ const WeeklySpecialsBanner = () => {
             />
 
             {/* Header with chalk-style text */}
-            <div className="relative mb-2">
+            <div className={`relative mb-2 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
               <div className="flex items-center justify-center gap-2 mb-1">
                 <Sparkles className="w-5 h-5" style={{ color: '#f5e6b8' }} />
                 <span
@@ -129,7 +129,7 @@ const WeeklySpecialsBanner = () => {
               </div>
 
               {/* Decorative chalk line */}
-              <div className="mx-auto w-48 h-px mb-5" style={{ background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent)' }} />
+              <div className={`mx-auto h-px mb-5 transition-all duration-1000 delay-300 ${isVisible ? 'w-48 opacity-100' : 'w-0 opacity-0'}`} style={{ background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent)' }} />
             </div>
 
             {/* Day */}
