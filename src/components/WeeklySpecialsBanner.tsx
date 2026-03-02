@@ -55,17 +55,27 @@ const weeklySpecials = [
 
 const WeeklySpecialsBanner = () => {
   const [todayIndex, setTodayIndex] = useState(0);
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const day = new Date().getDay();
-    // getDay(): 0=Sun, 1=Mon... map to our array (0=Mon)
     setTodayIndex(day === 0 ? 6 : day - 1);
+  }, []);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) setIsVisible(true); },
+      { threshold: 0.3 }
+    );
+    if (sectionRef.current) observer.observe(sectionRef.current);
+    return () => observer.disconnect();
   }, []);
 
   const today = weeklySpecials[todayIndex];
 
   return (
-    <section className="py-12 px-4">
+    <section ref={sectionRef} className="py-12 px-4">
       <div className="container mx-auto max-w-3xl">
         {/* Chalkboard */}
         <div className="relative">
