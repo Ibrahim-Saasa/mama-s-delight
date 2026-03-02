@@ -252,7 +252,7 @@ const Checkout = () => {
 
               <Button
                 onClick={handlePlaceOrder}
-                className="w-full rounded-full font-fredoka text-lg py-6 bg-green-600 hover:bg-green-700 text-white shadow-md"
+                className="w-full rounded-full font-fredoka text-lg py-6 bg-primary hover:bg-primary/90 text-primary-foreground shadow-md"
               >
                 <MessageCircle className="h-5 w-5 mr-2" />
                 Place Order via WhatsApp
