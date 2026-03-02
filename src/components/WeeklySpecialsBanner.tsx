@@ -134,7 +134,7 @@ const WeeklySpecialsBanner = () => {
 
             {/* Day */}
             <p
-              className="font-quicksand text-xs md:text-sm tracking-[0.2em] uppercase mb-3"
+              className={`font-quicksand text-xs md:text-sm tracking-[0.2em] uppercase mb-3 transition-all duration-700 delay-200 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
               style={{ color: 'rgba(255,255,255,0.4)' }}
             >
               ~ {today.day} ~
