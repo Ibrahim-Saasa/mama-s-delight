@@ -157,7 +157,7 @@ const WeeklySpecialsBanner = () => {
 
             {/* Note / pun */}
             <p
-              className="font-quicksand italic text-sm md:text-base mb-4"
+              className={`font-quicksand italic text-sm md:text-base mb-4 transition-all duration-700 delay-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
               style={{ color: 'rgba(255,255,255,0.55)' }}
             >
               "{today.note}"
