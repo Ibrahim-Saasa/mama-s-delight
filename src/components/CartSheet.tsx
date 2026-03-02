@@ -120,7 +120,13 @@ const CartSheet = () => {
                   >
                     Clear Cart
                   </Button>
-                  <Button className="flex-1 bg-primary hover:bg-primary/90 text-primary-foreground font-fredoka rounded-full shadow-md">
+                  <Button
+                    className="flex-1 bg-primary hover:bg-primary/90 text-primary-foreground font-fredoka rounded-full shadow-md"
+                    onClick={() => {
+                      setOpen(false);
+                      navigate('/checkout');
+                    }}
+                  >
                     Checkout <span>🎉</span>
                   </Button>
                 </div>
