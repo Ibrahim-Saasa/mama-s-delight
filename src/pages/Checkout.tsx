@@ -23,12 +23,15 @@ const Checkout = () => {
   const [notes, setNotes] = useState('');
   const [paymentMethod, setPaymentMethod] = useState<'whatsapp' | 'cod'>('whatsapp');
 
-  if (!user) {
+  const isUnauthenticated = !user;
+  const isCartEmpty = cartItems.length === 0;
+
+  if (isUnauthenticated) {
     navigate('/auth');
     return null;
   }
 
-  if (cartItems.length === 0) {
+  if (isCartEmpty) {
     return (
       <div className="min-h-screen bg-background">
         <Header />
