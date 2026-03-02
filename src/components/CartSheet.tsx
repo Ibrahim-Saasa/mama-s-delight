@@ -3,7 +3,9 @@ import { Button } from '@/components/ui/button';
 import { ShoppingCart, Plus, Minus, Trash2 } from 'lucide-react';
 import { useCart } from '@/hooks/useCart';
 import { useAuth } from '@/hooks/useAuth';
+import { useNavigate } from 'react-router-dom';
 import { cn } from '@/lib/utils';
+import { useState } from 'react';
 
 const CartSheet = () => {
   const { user } = useAuth();
