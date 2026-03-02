@@ -141,7 +141,7 @@ const WeeklySpecialsBanner = () => {
             </p>
 
             {/* Dish name */}
-            <div className="mb-3">
+            <div className={`mb-3 transition-all duration-700 delay-500 ${isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-90'}`}>
               <span className="text-4xl md:text-5xl block mb-2">{today.emoji}</span>
               <h3
                 className="font-fredoka text-2xl md:text-3xl"
