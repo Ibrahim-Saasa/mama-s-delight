@@ -10,7 +10,8 @@ import { useState } from 'react';
 const CartSheet = () => {
   const { user } = useAuth();
   const { cartItems, cartCount, cartTotal, updateQuantity, removeFromCart, clearCart, loading } = useCart();
-
+  const navigate = useNavigate();
+  const [open, setOpen] = useState(false);
   return (
     <Sheet>
       <SheetTrigger asChild>
