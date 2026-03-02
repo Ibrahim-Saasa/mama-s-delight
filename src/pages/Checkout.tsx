@@ -183,7 +183,7 @@ const Checkout = () => {
                   }`}
                 >
                   <RadioGroupItem value="whatsapp" id="pm-whatsapp" />
-                  <MessageCircle className="h-6 w-6 text-green-600" />
+                  <MessageCircle className="h-6 w-6 text-primary" />
                   <div>
                     <p className="font-fredoka text-foreground">Order via WhatsApp</p>
                     <p className="text-sm text-muted-foreground">
