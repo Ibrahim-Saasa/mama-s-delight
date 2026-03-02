@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Sparkles } from 'lucide-react';
 
 const weeklySpecials = [
@@ -55,17 +55,27 @@ const weeklySpecials = [
 
 const WeeklySpecialsBanner = () => {
   const [todayIndex, setTodayIndex] = useState(0);
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const day = new Date().getDay();
-    // getDay(): 0=Sun, 1=Mon... map to our array (0=Mon)
     setTodayIndex(day === 0 ? 6 : day - 1);
+  }, []);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) setIsVisible(true); },
+      { threshold: 0.3 }
+    );
+    if (sectionRef.current) observer.observe(sectionRef.current);
+    return () => observer.disconnect();
   }, []);
 
   const today = weeklySpecials[todayIndex];
 
   return (
-    <section className="py-12 px-4">
+    <section ref={sectionRef} className="py-12 px-4">
       <div className="container mx-auto max-w-3xl">
         {/* Chalkboard */}
         <div className="relative">
@@ -106,7 +116,7 @@ const WeeklySpecialsBanner = () => {
             />
 
             {/* Header with chalk-style text */}
-            <div className="relative mb-2">
+            <div className={`relative mb-2 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
               <div className="flex items-center justify-center gap-2 mb-1">
                 <Sparkles className="w-5 h-5" style={{ color: '#f5e6b8' }} />
                 <span
@@ -119,19 +129,19 @@ const WeeklySpecialsBanner = () => {
               </div>
 
               {/* Decorative chalk line */}
-              <div className="mx-auto w-48 h-px mb-5" style={{ background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent)' }} />
+              <div className={`mx-auto h-px mb-5 transition-all duration-1000 delay-300 ${isVisible ? 'w-48 opacity-100' : 'w-0 opacity-0'}`} style={{ background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent)' }} />
             </div>
 
             {/* Day */}
             <p
-              className="font-quicksand text-xs md:text-sm tracking-[0.2em] uppercase mb-3"
+              className={`font-quicksand text-xs md:text-sm tracking-[0.2em] uppercase mb-3 transition-all duration-700 delay-200 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
               style={{ color: 'rgba(255,255,255,0.4)' }}
             >
               ~ {today.day} ~
             </p>
 
             {/* Dish name */}
-            <div className="mb-3">
+            <div className={`mb-3 transition-all duration-700 delay-500 ${isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-90'}`}>
               <span className="text-4xl md:text-5xl block mb-2">{today.emoji}</span>
               <h3
                 className="font-fredoka text-2xl md:text-3xl"
@@ -147,14 +157,14 @@ const WeeklySpecialsBanner = () => {
 
             {/* Note / pun */}
             <p
-              className="font-quicksand italic text-sm md:text-base mb-4"
+              className={`font-quicksand italic text-sm md:text-base mb-4 transition-all duration-700 delay-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
               style={{ color: 'rgba(255,255,255,0.55)' }}
             >
               "{today.note}"
             </p>
 
             {/* Price in chalk circle */}
-            <div className="inline-block relative">
+            <div className={`inline-block relative transition-all duration-700 delay-[900ms] ${isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-75'}`}>
               <div
                 className="px-6 py-2 rounded-full"
                 style={{
@@ -174,7 +184,7 @@ const WeeklySpecialsBanner = () => {
             </div>
 
             {/* Bottom decorative chalk line */}
-            <div className="mx-auto w-32 h-px mt-6" style={{ background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent)' }} />
+            <div className={`mx-auto h-px mt-6 transition-all duration-1000 delay-[1100ms] ${isVisible ? 'w-32 opacity-100' : 'w-0 opacity-0'}`} style={{ background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent)' }} />
           </div>
         </div>
       </div>
