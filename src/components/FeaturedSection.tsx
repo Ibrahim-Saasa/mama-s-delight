@@ -54,6 +54,7 @@ const featuredItems = [
 const FeaturedSection = () => {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const [selectedIndex, setSelectedIndex] = useState(0);
+  const navigate = useNavigate();
 
   const [emblaRef, emblaApi] = useEmblaCarousel(
     { 
