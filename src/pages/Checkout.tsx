@@ -138,9 +138,14 @@ const Checkout = () => {
                 <Input
                   id="phone"
                   value={phone}
-                  onChange={(e) => setPhone(e.target.value)}
+                  onChange={(e) => { setPhone(e.target.value); setPhoneVerified(false); }}
                   placeholder="+91 98765 43210"
                   className="rounded-2xl"
+                />
+                <PhoneVerification
+                  phone={phone}
+                  onVerified={() => setPhoneVerified(true)}
+                  isVerified={phoneVerified}
                 />
               </div>
 
