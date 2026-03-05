@@ -204,7 +204,7 @@ const FeaturedSection = () => {
 
         {/* View All Button */}
         <div className="text-center mt-12">
-          <LemonButton size="lg">
+          <LemonButton size="lg" onClick={() => navigate('/menu')}>
             See Full Menu 🍽️
           </LemonButton>
         </div>
