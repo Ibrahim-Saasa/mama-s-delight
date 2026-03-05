@@ -151,6 +151,17 @@ const Checkout = () => {
                 />
               </div>
 
+              {/* Map Location Picker */}
+              <Suspense fallback={<div className="h-[250px] rounded-2xl bg-muted animate-pulse" />}>
+                <LocationPicker
+                  onLocationSelect={(lat, lng, addr) => {
+                    if (addr && !address.trim()) {
+                      setAddress(addr);
+                    }
+                  }}
+                />
+              </Suspense>
+
               <div className="space-y-2">
                 <Label htmlFor="notes" className="font-quicksand font-semibold">
                   Special Instructions (optional)
