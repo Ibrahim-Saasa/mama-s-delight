@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, lazy, Suspense } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useCart } from '@/hooks/useCart';
 import { useAuth } from '@/hooks/useAuth';
@@ -11,6 +11,8 @@ import { Label } from '@/components/ui/label';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { MessageCircle, Banknote, ArrowLeft, MapPin, Phone, User } from 'lucide-react';
 import { toast } from 'sonner';
+
+const LocationPicker = lazy(() => import('@/components/LocationPicker'));
 
 const Checkout = () => {
   const navigate = useNavigate();
@@ -148,6 +150,17 @@ const Checkout = () => {
                   className="rounded-2xl min-h-[80px]"
                 />
               </div>
+
+              {/* Map Location Picker */}
+              <Suspense fallback={<div className="h-[250px] rounded-2xl bg-muted animate-pulse" />}>
+                <LocationPicker
+                  onLocationSelect={(lat, lng, addr) => {
+                    if (addr && !address.trim()) {
+                      setAddress(addr);
+                    }
+                  }}
+                />
+              </Suspense>
 
               <div className="space-y-2">
                 <Label htmlFor="notes" className="font-quicksand font-semibold">
