@@ -77,6 +77,10 @@ const Checkout = () => {
       toast.error('Please fill in all required fields');
       return;
     }
+    if (!phoneVerified) {
+      toast.error('Please verify your phone number first');
+      return;
+    }
 
     const whatsappNumber = '919999999999'; // Replace with actual business number
     const message = buildOrderMessage();
