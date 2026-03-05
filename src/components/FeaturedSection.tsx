@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { cn } from '@/lib/utils';
 import LemonButton from './LemonButton';
 import { Sparkles, ChevronLeft, ChevronRight } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import useEmblaCarousel from 'embla-carousel-react';
 import Autoplay from 'embla-carousel-autoplay';
 
@@ -53,6 +54,7 @@ const featuredItems = [
 const FeaturedSection = () => {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const [selectedIndex, setSelectedIndex] = useState(0);
+  const navigate = useNavigate();
 
   const [emblaRef, emblaApi] = useEmblaCarousel(
     { 
@@ -202,7 +204,7 @@ const FeaturedSection = () => {
 
         {/* View All Button */}
         <div className="text-center mt-12">
-          <LemonButton size="lg">
+          <LemonButton size="lg" onClick={() => navigate('/menu')}>
             See Full Menu 🍽️
           </LemonButton>
         </div>
