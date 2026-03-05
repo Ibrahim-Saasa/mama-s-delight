@@ -13,6 +13,7 @@ import { MessageCircle, Banknote, ArrowLeft, MapPin, Phone, User } from 'lucide-
 import { toast } from 'sonner';
 
 import LocationPicker from '@/components/LocationPicker';
+import PhoneVerification from '@/components/PhoneVerification';
 
 const Checkout = () => {
   const navigate = useNavigate();
@@ -24,6 +25,7 @@ const Checkout = () => {
   const [address, setAddress] = useState('');
   const [notes, setNotes] = useState('');
   const [paymentMethod, setPaymentMethod] = useState<'whatsapp' | 'cod'>('whatsapp');
+  const [phoneVerified, setPhoneVerified] = useState(false);
 
   const isUnauthenticated = !user;
   const isCartEmpty = cartItems.length === 0;
@@ -73,6 +75,10 @@ const Checkout = () => {
   const handlePlaceOrder = async () => {
     if (!name.trim() || !phone.trim() || !address.trim()) {
       toast.error('Please fill in all required fields');
+      return;
+    }
+    if (!phoneVerified) {
+      toast.error('Please verify your phone number first');
       return;
     }
 
@@ -132,9 +138,14 @@ const Checkout = () => {
                 <Input
                   id="phone"
                   value={phone}
-                  onChange={(e) => setPhone(e.target.value)}
+                  onChange={(e) => { setPhone(e.target.value); setPhoneVerified(false); }}
                   placeholder="+91 98765 43210"
                   className="rounded-2xl"
+                />
+                <PhoneVerification
+                  phone={phone}
+                  onVerified={() => setPhoneVerified(true)}
+                  isVerified={phoneVerified}
                 />
               </div>
 
