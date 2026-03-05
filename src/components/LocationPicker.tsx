@@ -1,10 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
-import { MapContainer, TileLayer, Marker, useMapEvents } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import { MapPin } from 'lucide-react';
 
-// Fix default marker icon issue with bundlers
+// Fix default marker icon
 delete (L.Icon.Default.prototype as any)._getIconUrl;
 L.Icon.Default.mergeOptions({
   iconRetinaUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-icon-2x.png',
@@ -16,40 +15,13 @@ interface LocationPickerProps {
   onLocationSelect: (lat: number, lng: number, address?: string) => void;
 }
 
-function DraggableMarker({ position, onPositionChange }: { position: [number, number]; onPositionChange: (lat: number, lng: number) => void }) {
-  const markerRef = useRef<L.Marker>(null);
-
-  useMapEvents({
-    click(e) {
-      onPositionChange(e.latlng.lat, e.latlng.lng);
-    },
-  });
-
-  return (
-    <Marker
-      draggable
-      position={position}
-      ref={markerRef}
-      eventHandlers={{
-        dragend() {
-          const marker = markerRef.current;
-          if (marker) {
-            const latlng = marker.getLatLng();
-            onPositionChange(latlng.lat, latlng.lng);
-          }
-        },
-      }}
-    />
-  );
-}
-
 const LocationPicker = ({ onLocationSelect }: LocationPickerProps) => {
-  const [position, setPosition] = useState<[number, number]>([20.5937, 78.9629]); // Default: India center
+  const mapRef = useRef<HTMLDivElement>(null);
+  const mapInstanceRef = useRef<L.Map | null>(null);
+  const markerRef = useRef<L.Marker | null>(null);
   const [locating, setLocating] = useState(false);
 
-  const handlePositionChange = async (lat: number, lng: number) => {
-    setPosition([lat, lng]);
-    // Reverse geocode
+  const reverseGeocode = async (lat: number, lng: number) => {
     try {
       const res = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}`);
       const data = await res.json();
@@ -59,13 +31,50 @@ const LocationPicker = ({ onLocationSelect }: LocationPickerProps) => {
     }
   };
 
+  const updateMarker = (lat: number, lng: number) => {
+    const map = mapInstanceRef.current;
+    if (!map) return;
+    if (markerRef.current) {
+      markerRef.current.setLatLng([lat, lng]);
+    } else {
+      markerRef.current = L.marker([lat, lng], { draggable: true }).addTo(map);
+      markerRef.current.on('dragend', () => {
+        const pos = markerRef.current!.getLatLng();
+        reverseGeocode(pos.lat, pos.lng);
+      });
+    }
+    map.setView([lat, lng], map.getZoom());
+    reverseGeocode(lat, lng);
+  };
+
+  useEffect(() => {
+    if (!mapRef.current || mapInstanceRef.current) return;
+
+    const map = L.map(mapRef.current).setView([20.5937, 78.9629], 5);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+    }).addTo(map);
+
+    map.on('click', (e: L.LeafletMouseEvent) => {
+      updateMarker(e.latlng.lat, e.latlng.lng);
+    });
+
+    mapInstanceRef.current = map;
+
+    return () => {
+      map.remove();
+      mapInstanceRef.current = null;
+      markerRef.current = null;
+    };
+  }, []);
+
   const handleLocateMe = () => {
     if (!navigator.geolocation) return;
     setLocating(true);
     navigator.geolocation.getCurrentPosition(
       (pos) => {
-        const { latitude, longitude } = pos.coords;
-        handlePositionChange(latitude, longitude);
+        updateMarker(pos.coords.latitude, pos.coords.longitude);
+        mapInstanceRef.current?.setZoom(15);
         setLocating(false);
       },
       () => setLocating(false),
@@ -88,21 +97,11 @@ const LocationPicker = ({ onLocationSelect }: LocationPickerProps) => {
           {locating ? 'Locating...' : '📍 Use my location'}
         </button>
       </div>
-      <div className="rounded-2xl overflow-hidden border border-border/50 shadow-soft" style={{ height: 250 }}>
-        <MapContainer
-          center={position}
-          zoom={13}
-          scrollWheelZoom
-          style={{ height: '100%', width: '100%' }}
-          key={`${position[0]}-${position[1]}`}
-        >
-          <TileLayer
-            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-          />
-          <DraggableMarker position={position} onPositionChange={handlePositionChange} />
-        </MapContainer>
-      </div>
+      <div
+        ref={mapRef}
+        className="rounded-2xl overflow-hidden border border-border/50 shadow-soft"
+        style={{ height: 250 }}
+      />
       <p className="text-xs text-muted-foreground">Click on the map or drag the pin to set your delivery location.</p>
     </div>
   );
