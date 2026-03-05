@@ -25,6 +25,7 @@ const Checkout = () => {
   const [address, setAddress] = useState('');
   const [notes, setNotes] = useState('');
   const [paymentMethod, setPaymentMethod] = useState<'whatsapp' | 'cod'>('whatsapp');
+  const [phoneVerified, setPhoneVerified] = useState(false);
 
   const isUnauthenticated = !user;
   const isCartEmpty = cartItems.length === 0;
