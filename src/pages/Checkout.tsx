@@ -13,6 +13,7 @@ import { MessageCircle, Banknote, ArrowLeft, MapPin, Phone, User } from 'lucide-
 import { toast } from 'sonner';
 
 import LocationPicker from '@/components/LocationPicker';
+import PhoneVerification from '@/components/PhoneVerification';
 
 const Checkout = () => {
   const navigate = useNavigate();
