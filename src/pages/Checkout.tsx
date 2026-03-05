@@ -12,7 +12,7 @@ import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { MessageCircle, Banknote, ArrowLeft, MapPin, Phone, User } from 'lucide-react';
 import { toast } from 'sonner';
 
-const LocationPicker = lazy(() => import('@/components/LocationPicker'));
+import LocationPicker from '@/components/LocationPicker';
 
 const Checkout = () => {
   const navigate = useNavigate();
