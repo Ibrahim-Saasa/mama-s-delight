@@ -13,6 +13,7 @@ import CuisineDetail from "./pages/CuisineDetail";
 import About from "./pages/About";
 import Cuisines from "./pages/Cuisines";
 import Checkout from "./pages/Checkout";
+import MenuItemDetail from "./pages/MenuItemDetail";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -28,6 +29,7 @@ const App = () => (
             <Routes>
               <Route path="/" element={<Index />} />
               <Route path="/menu" element={<Menu />} />
+              <Route path="/menu/:slug" element={<MenuItemDetail />} />
               <Route path="/auth" element={<Auth />} />
               <Route path="/profile" element={<Profile />} />
               <Route path="/cuisines" element={<Cuisines />} />

@@ -1,4 +1,5 @@
 import { useState, useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { cn } from '@/lib/utils';
 import { Sparkles } from 'lucide-react';
 import { useCart } from '@/hooks/useCart';
@@ -20,6 +21,7 @@ interface MenuItemCardProps {
   emoji: string;
   isSpicy?: boolean;
   isVegetarian?: boolean;
+  slug?: string | null;
 }
 
 const sprinkleColors = [
@@ -31,8 +33,9 @@ const sprinkleColors = [
   'hsl(45 90% 65%)',
 ];
 
-const MenuItemCard = ({ id, name, description, price, emoji, isSpicy, isVegetarian }: MenuItemCardProps) => {
+const MenuItemCard = ({ id, name, description, price, emoji, isSpicy, isVegetarian, slug }: MenuItemCardProps) => {
   const { addToCart } = useCart();
+  const navigate = useNavigate();
   const [isHovered, setIsHovered] = useState(false);
   const [sprinkles, setSprinkles] = useState<Sprinkle[]>([]);
 
@@ -66,6 +69,7 @@ const MenuItemCard = ({ id, name, description, price, emoji, isSpicy, isVegetari
         'hover:shadow-glow-pink hover:-translate-y-2 hover:scale-[1.02]',
         'group'
       )}
+      onClick={() => slug && navigate(`/menu/${slug}`)}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
@@ -130,7 +134,7 @@ const MenuItemCard = ({ id, name, description, price, emoji, isSpicy, isVegetari
           <span className="font-fredoka text-xl text-primary">₹{price.toFixed(2)}</span>
           <button 
             className="bg-primary hover:bg-primary/90 text-primary-foreground rounded-full w-9 h-9 flex items-center justify-center text-lg transition-all duration-300 hover:scale-110 active:scale-95 shadow-md"
-            onClick={() => addToCart(id)}
+            onClick={(e) => { e.stopPropagation(); addToCart(id); }}
           >
             🛒
           </button>
