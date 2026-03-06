@@ -56,6 +56,7 @@ const MenuSection = ({ title, subtitle, icon: Icon, items, accentColor = 'pink' 
             emoji={item.emoji}
             isSpicy={item.is_spicy}
             isVegetarian={item.is_vegetarian}
+            slug={item.slug}
           />
         ))}
       </div>
