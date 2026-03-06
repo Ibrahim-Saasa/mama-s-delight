@@ -33,8 +33,9 @@ const sprinkleColors = [
   'hsl(45 90% 65%)',
 ];
 
-const MenuItemCard = ({ id, name, description, price, emoji, isSpicy, isVegetarian }: MenuItemCardProps) => {
+const MenuItemCard = ({ id, name, description, price, emoji, isSpicy, isVegetarian, slug }: MenuItemCardProps) => {
   const { addToCart } = useCart();
+  const navigate = useNavigate();
   const [isHovered, setIsHovered] = useState(false);
   const [sprinkles, setSprinkles] = useState<Sprinkle[]>([]);
 
