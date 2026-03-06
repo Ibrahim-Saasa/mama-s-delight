@@ -8,6 +8,7 @@ export interface Profile {
   user_id: string;
   username: string | null;
   avatar_url: string | null;
+  phone: string | null;
   created_at: string;
   updated_at: string;
 }
@@ -29,7 +30,7 @@ export const useProfile = () => {
     if (error) {
       console.error('Error fetching profile:', error);
     } else {
-      setProfile(data);
+      setProfile(data as Profile | null);
     }
     setLoading(false);
   };
@@ -61,7 +62,6 @@ export const useProfile = () => {
     const fileExt = file.name.split('.').pop();
     const filePath = `${user.id}/avatar.${fileExt}`;
 
-    // Upload to storage
     const { error: uploadError } = await supabase.storage
       .from('avatars')
       .upload(filePath, file, { upsert: true });
@@ -72,15 +72,12 @@ export const useProfile = () => {
       return null;
     }
 
-    // Get public URL
     const { data: { publicUrl } } = supabase.storage
       .from('avatars')
       .getPublicUrl(filePath);
 
-    // Add cache buster
     const avatarUrl = `${publicUrl}?t=${Date.now()}`;
 
-    // Update profile
     const { error: updateError } = await supabase
       .from('profiles')
       .update({ avatar_url: avatarUrl })
