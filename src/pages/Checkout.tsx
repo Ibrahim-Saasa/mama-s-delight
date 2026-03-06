@@ -144,18 +144,31 @@ const Checkout = () => {
                 <Label htmlFor="phone" className="font-quicksand font-semibold flex items-center gap-2">
                   <Phone className="h-4 w-4 text-muted-foreground" /> Phone Number *
                 </Label>
-                <Input
-                  id="phone"
-                  value={phone}
-                  onChange={(e) => { setPhone(e.target.value); setPhoneVerified(false); }}
-                  placeholder="+91 98765 43210"
-                  className="rounded-2xl"
-                />
-                <PhoneVerification
-                  phone={phone}
-                  onVerified={() => setPhoneVerified(true)}
-                  isVerified={phoneVerified}
-                />
+                <div className="relative">
+                  <Input
+                    id="phone"
+                    value={phone}
+                    onChange={(e) => { setPhone(e.target.value); setPhoneVerified(false); }}
+                    placeholder="+91 98765 43210"
+                    className="rounded-2xl"
+                    readOnly={!!profile?.phone && phoneVerified}
+                  />
+                  {profile?.phone && phoneVerified && (
+                    <div className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center gap-1.5 text-primary">
+                      <span className="text-xs font-quicksand font-semibold">Verified</span>
+                      <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                      </svg>
+                    </div>
+                  )}
+                </div>
+                {!(profile?.phone && phoneVerified) && (
+                  <PhoneVerification
+                    phone={phone}
+                    onVerified={() => setPhoneVerified(true)}
+                    isVerified={phoneVerified}
+                  />
+                )}
               </div>
 
               <div className="space-y-2">
