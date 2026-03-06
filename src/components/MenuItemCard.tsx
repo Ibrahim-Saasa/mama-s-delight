@@ -1,4 +1,5 @@
 import { useState, useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { cn } from '@/lib/utils';
 import { Sparkles } from 'lucide-react';
 import { useCart } from '@/hooks/useCart';

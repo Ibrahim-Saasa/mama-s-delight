@@ -10,6 +10,7 @@ export interface MenuItem {
   category: string;
   is_spicy: boolean;
   is_vegetarian: boolean;
+  slug: string | null;
 }
 
 export const useMenuItems = () => {
