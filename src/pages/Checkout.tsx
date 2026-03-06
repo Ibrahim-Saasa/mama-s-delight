@@ -20,6 +20,7 @@ const Checkout = () => {
   const navigate = useNavigate();
   const { user } = useAuth();
   const { cartItems, cartTotal, clearCart } = useCart();
+  const { profile } = useProfile();
 
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
@@ -28,6 +29,13 @@ const Checkout = () => {
   const [paymentMethod, setPaymentMethod] = useState<'whatsapp' | 'cod'>('whatsapp');
   const [phoneVerified, setPhoneVerified] = useState(false);
 
+  // Pre-fill phone from profile (phone sign-in users)
+  useEffect(() => {
+    if (profile?.phone && !phone) {
+      setPhone(profile.phone);
+      setPhoneVerified(true);
+    }
+  }, [profile]);
   const isUnauthenticated = !user;
   const isCartEmpty = cartItems.length === 0;
 
