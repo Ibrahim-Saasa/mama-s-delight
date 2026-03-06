@@ -21,6 +21,7 @@ interface MenuItemCardProps {
   emoji: string;
   isSpicy?: boolean;
   isVegetarian?: boolean;
+  slug?: string | null;
 }
 
 const sprinkleColors = [
