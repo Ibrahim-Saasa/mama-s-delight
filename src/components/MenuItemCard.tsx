@@ -69,6 +69,7 @@ const MenuItemCard = ({ id, name, description, price, emoji, isSpicy, isVegetari
         'hover:shadow-glow-pink hover:-translate-y-2 hover:scale-[1.02]',
         'group'
       )}
+      onClick={() => slug && navigate(`/menu/${slug}`)}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
