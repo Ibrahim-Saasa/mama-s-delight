@@ -43,13 +43,13 @@ const Blog = () => {
             : Promise.resolve({ data: [] }),
         ]);
 
-        const profileMap = new Map(profiles?.map(p => [p.user_id, p]) || []);
-        const menuMap = new Map(menuItems?.map(m => [m.id, m]) || []);
+        const profileMap = new Map((profiles || []).map(p => [p.user_id, p] as const));
+        const menuMap = new Map((menuItems || []).map(m => [m.id, m] as const));
 
         setPosts(postsData.map(p => ({
           ...p,
           profile: profileMap.get(p.user_id) || { username: null, avatar_url: null },
-          menu_item: p.menu_item_id ? menuMap.get(p.menu_item_id) || null : null,
+          menu_item: p.menu_item_id ? (menuMap.get(p.menu_item_id) as { name: string; emoji: string } | undefined) || null : null,
         })));
       }
       setLoading(false);
