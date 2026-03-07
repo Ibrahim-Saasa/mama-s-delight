@@ -1,9 +1,11 @@
 import { useState } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { useMenuItemDetail } from '@/hooks/useMenuItemDetail';
+import { useMenuItems } from '@/hooks/useMenuItems';
 import { useCart } from '@/hooks/useCart';
 import { useAuth } from '@/hooks/useAuth';
 import Header from '@/components/Header';
+import MenuItemCard from '@/components/MenuItemCard';
 import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
@@ -41,6 +43,7 @@ const MenuItemDetail = () => {
   const { slug } = useParams<{ slug: string }>();
   const navigate = useNavigate();
   const { item, reviews, loading, averageRating } = useMenuItemDetail(slug);
+  const { menuItems } = useMenuItems();
   const { addToCart } = useCart();
   const { user } = useAuth();
 
@@ -325,6 +328,36 @@ const MenuItemDetail = () => {
             </div>
           )}
         </div>
+
+        {/* You Might Also Like */}
+        {item && (() => {
+          const related = menuItems
+            .filter(mi => mi.category === item.category && mi.id !== item.id)
+            .slice(0, 4);
+          if (related.length === 0) return null;
+          return (
+            <div>
+              <h2 className="font-fredoka text-2xl text-foreground text-center mb-6">
+                🍽️ You Might Also Like
+              </h2>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                {related.map(ri => (
+                  <MenuItemCard
+                    key={ri.id}
+                    id={ri.id}
+                    name={ri.name}
+                    description={ri.description}
+                    price={ri.price}
+                    emoji={ri.emoji}
+                    isSpicy={ri.is_spicy}
+                    isVegetarian={ri.is_vegetarian}
+                    slug={ri.slug}
+                  />
+                ))}
+              </div>
+            </div>
+          );
+        })()}
 
         {/* Back to Menu CTA */}
         <div className="text-center">
