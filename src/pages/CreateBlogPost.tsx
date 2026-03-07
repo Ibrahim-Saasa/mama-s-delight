@@ -15,7 +15,7 @@ import { toast } from 'sonner';
 
 const CreateBlogPost = () => {
   const navigate = useNavigate();
-  const { user } = useAuth();
+  const { user, loading } = useAuth();
   const { menuItems } = useMenuItems();
 
   const [title, setTitle] = useState('');
@@ -26,8 +26,8 @@ const CreateBlogPost = () => {
   const [submitting, setSubmitting] = useState(false);
 
   useEffect(() => {
-    if (!user) navigate('/auth');
-  }, [user, navigate]);
+    if (!loading && !user) navigate('/auth');
+  }, [user, loading, navigate]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
