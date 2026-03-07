@@ -43,6 +43,7 @@ const MenuItemDetail = () => {
   const { slug } = useParams<{ slug: string }>();
   const navigate = useNavigate();
   const { item, reviews, loading, averageRating } = useMenuItemDetail(slug);
+  const { menuItems } = useMenuItems();
   const { addToCart } = useCart();
   const { user } = useAuth();
 
