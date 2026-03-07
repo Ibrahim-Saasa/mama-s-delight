@@ -14,6 +14,9 @@ import About from "./pages/About";
 import Cuisines from "./pages/Cuisines";
 import Checkout from "./pages/Checkout";
 import MenuItemDetail from "./pages/MenuItemDetail";
+import Blog from "./pages/Blog";
+import BlogPostDetail from "./pages/BlogPostDetail";
+import CreateBlogPost from "./pages/CreateBlogPost";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -35,6 +38,9 @@ const App = () => (
               <Route path="/cuisines" element={<Cuisines />} />
               <Route path="/cuisine/:slug" element={<CuisineDetail />} />
               <Route path="/about" element={<About />} />
+              <Route path="/blog" element={<Blog />} />
+              <Route path="/blog/new" element={<CreateBlogPost />} />
+              <Route path="/blog/:id" element={<BlogPostDetail />} />
               <Route path="/checkout" element={<Checkout />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
