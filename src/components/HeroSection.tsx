@@ -38,7 +38,7 @@ const HeroSection = () => {
             <span className="text-foreground text-2xl md:text-3xl lg:text-4xl">
               straight from Mama's Kitchen! 
             </span>
-            <span className="inline-flex items-center gap-1 bg-emerald-100 text-emerald-700 text-xs font-quicksand font-bold px-3 py-1 rounded-full border border-emerald-200 ml-2 align-middle">
+            <span className="inline-flex items-center gap-1 bg-halal-bg text-halal text-xs font-quicksand font-bold px-3 py-1 rounded-full border border-halal-border ml-2 align-middle">
               ☪ 100% Halal
             </span>
             <Sparkles className="inline-block ml-2 text-accent animate-sparkle" size={32} />
