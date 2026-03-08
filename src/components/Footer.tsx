@@ -67,7 +67,7 @@ const Footer = () => {
         <div className="border-t border-border/50 pt-8">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             <div className="flex flex-col sm:flex-row items-center gap-2 text-center md:text-left">
-              <span className="inline-flex items-center gap-1 bg-emerald-100 text-emerald-700 text-xs font-quicksand font-bold px-2.5 py-0.5 rounded-full border border-emerald-200">
+              <span className="inline-flex items-center gap-1 bg-halal-bg text-halal text-xs font-quicksand font-bold px-2.5 py-0.5 rounded-full border border-halal-border">
                 ☪ 100% Halal Certified
               </span>
               <p className="font-quicksand text-sm text-muted-foreground">
