@@ -150,19 +150,56 @@ const Auth = () => {
       // Try sign in first
       const { error: signInError } = await signIn(derivedEmail, derivedPassword);
       if (signInError) {
-        // If doesn't exist, sign up
+        // If doesn't exist, sign up then auto-confirm via edge function
         const { error: signUpError } = await signUp(derivedEmail, derivedPassword);
         if (signUpError) {
           toast.error(signUpError.message);
           setIsLoading(false);
           return;
         }
-        // Sign in after sign up
-        const { error: retryError } = await signIn(derivedEmail, derivedPassword);
-        if (retryError) {
-          toast.error('Account created! Please verify your email to sign in.');
-          setIsLoading(false);
-          return;
+
+        // Get the newly created user and confirm via edge function
+        const { data: signUpData } = await supabase.auth.getSession();
+        // We need the user id from the signup - fetch it by signing in with admin confirm
+        const confirmRes = await supabase.functions.invoke('confirm-phone-user', {
+          body: { userId: signUpData?.session?.user?.id },
+        });
+
+        // If no session yet (unconfirmed), try to get user id another way
+        if (!signUpData?.session?.user?.id) {
+          // Sign up returns user even when unconfirmed - re-attempt signup to get user
+          // The user was already created, so we need to find them
+          // Try signing in - it should work now after confirmation
+          const { error: retryError } = await signIn(derivedEmail, derivedPassword);
+          if (retryError) {
+            // User exists but not confirmed - call edge function with a lookup approach
+            const lookupRes = await fetch(
+              `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/confirm-phone-user`,
+              {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY}`,
+                  'apikey': import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY,
+                },
+                body: JSON.stringify({ email: derivedEmail }),
+              }
+            );
+            
+            if (lookupRes.ok) {
+              // Now try sign in again
+              const { error: finalError } = await signIn(derivedEmail, derivedPassword);
+              if (finalError) {
+                toast.error('Something went wrong. Please try again.');
+                setIsLoading(false);
+                return;
+              }
+            } else {
+              toast.error('Could not verify your account. Please try again.');
+              setIsLoading(false);
+              return;
+            }
+          }
         }
       }
 
