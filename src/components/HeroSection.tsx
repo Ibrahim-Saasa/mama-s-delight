@@ -5,6 +5,7 @@ import SparkleParticles from './SparkleParticles';
 import { Cake, Coffee, Sparkles } from 'lucide-react';
 
 const HeroSection = () => {
+  const navigate = useNavigate();
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Hero Image Background */}
