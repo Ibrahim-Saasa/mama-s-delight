@@ -84,7 +84,7 @@ const Desserts = () => {
                 <Globe className="w-4 h-4" />
                 Sweets from Around the World
               </div>
-              <h1 className="font-fredoka text-5xl md:text-7xl text-foreground mb-3 drop-shadow-lg">
+              <h1 className="font-fredoka text-5xl md:text-7xl text-white mb-3 drop-shadow-lg">
                 Sweet Endings 🍰
               </h1>
               <p className="font-quicksand text-lg md:text-xl text-muted-foreground max-w-2xl drop-shadow">
