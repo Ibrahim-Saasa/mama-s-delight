@@ -78,7 +78,7 @@ const Desserts = () => {
               className="absolute inset-0 w-full h-full object-cover"
               loading="eager"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent" />
+            <div className="absolute inset-0 bg-black/50" />
             <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4">
               <div className="inline-flex items-center gap-2 bg-background/80 backdrop-blur-md text-foreground font-quicksand font-bold text-sm px-4 py-1.5 rounded-full mb-4 border border-border shadow-md">
                 <Globe className="w-4 h-4" />
