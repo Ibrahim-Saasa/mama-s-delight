@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import heroImage from '@/assets/hero-image.png';
 import FloatingElements from './FloatingElements';
 import SparkleParticles from './SparkleParticles';
