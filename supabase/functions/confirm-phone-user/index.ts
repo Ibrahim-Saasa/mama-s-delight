@@ -11,9 +11,11 @@ Deno.serve(async (req) => {
   }
 
   try {
-    const { userId } = await req.json();
-    if (!userId) {
-      return new Response(JSON.stringify({ error: "userId required" }), {
+    const body = await req.json();
+    const { userId, email } = body;
+
+    if (!userId && !email) {
+      return new Response(JSON.stringify({ error: "userId or email required" }), {
         status: 400,
         headers: { ...corsHeaders, "Content-Type": "application/json" },
       });
@@ -24,8 +26,38 @@ Deno.serve(async (req) => {
       Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!
     );
 
-    // Get user to check if it's a phone-derived account
-    const { data: userData, error: getUserError } = await supabaseAdmin.auth.admin.getUserById(userId);
+    let targetUserId = userId;
+
+    // If email provided, look up user by email
+    if (!targetUserId && email) {
+      // Only allow phone-derived emails
+      if (!email.endsWith("@biteside.phone.local")) {
+        return new Response(JSON.stringify({ error: "Not a phone-derived account" }), {
+          status: 403,
+          headers: { ...corsHeaders, "Content-Type": "application/json" },
+        });
+      }
+
+      const { data: users, error: listError } = await supabaseAdmin.auth.admin.listUsers();
+      if (listError) {
+        return new Response(JSON.stringify({ error: listError.message }), {
+          status: 500,
+          headers: { ...corsHeaders, "Content-Type": "application/json" },
+        });
+      }
+
+      const found = users.users.find((u) => u.email === email);
+      if (!found) {
+        return new Response(JSON.stringify({ error: "User not found" }), {
+          status: 404,
+          headers: { ...corsHeaders, "Content-Type": "application/json" },
+        });
+      }
+      targetUserId = found.id;
+    }
+
+    // Get user to verify it's a phone-derived account
+    const { data: userData, error: getUserError } = await supabaseAdmin.auth.admin.getUserById(targetUserId);
     if (getUserError || !userData?.user) {
       return new Response(JSON.stringify({ error: "User not found" }), {
         status: 404,
@@ -33,9 +65,8 @@ Deno.serve(async (req) => {
       });
     }
 
-    // Only confirm phone-derived accounts (email ends with @biteside.phone.local)
-    const email = userData.user.email || "";
-    if (!email.endsWith("@biteside.phone.local")) {
+    const userEmail = userData.user.email || "";
+    if (!userEmail.endsWith("@biteside.phone.local")) {
       return new Response(JSON.stringify({ error: "Not a phone-derived account" }), {
         status: 403,
         headers: { ...corsHeaders, "Content-Type": "application/json" },
@@ -43,7 +74,7 @@ Deno.serve(async (req) => {
     }
 
     // Confirm the user's email
-    const { error: updateError } = await supabaseAdmin.auth.admin.updateUserById(userId, {
+    const { error: updateError } = await supabaseAdmin.auth.admin.updateUserById(targetUserId, {
       email_confirm: true,
     });
 
