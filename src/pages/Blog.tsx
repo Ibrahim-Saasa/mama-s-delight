@@ -5,7 +5,7 @@ import { useAuth } from '@/hooks/useAuth';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
-import { PenLine, Clock, User as UserIcon } from 'lucide-react';
+import { PenLine, Clock, User as UserIcon, Heart, MessageCircle } from 'lucide-react';
 
 interface BlogPost {
   id: string;
@@ -18,6 +18,8 @@ interface BlogPost {
   created_at: string;
   profile?: { username: string | null; avatar_url: string | null };
   menu_item?: { name: string; emoji: string } | null;
+  like_count: number;
+  comment_count: number;
 }
 
 const Blog = () => {
@@ -33,23 +35,34 @@ const Blog = () => {
         .order('created_at', { ascending: false });
 
       if (postsData && postsData.length > 0) {
+        const postIds = postsData.map(p => p.id);
         const userIds = [...new Set(postsData.map(p => p.user_id))];
         const menuItemIds = postsData.map(p => p.menu_item_id).filter(Boolean) as string[];
 
-        const [{ data: profiles }, { data: menuItems }] = await Promise.all([
+        const [{ data: profiles }, { data: menuItems }, { data: likes }, { data: comments }] = await Promise.all([
           supabase.from('profiles').select('user_id, username, avatar_url').in('user_id', userIds),
           menuItemIds.length > 0
             ? supabase.from('menu_items').select('id, name, emoji').in('id', menuItemIds)
             : Promise.resolve({ data: [] }),
+          supabase.from('blog_likes').select('blog_post_id').in('blog_post_id', postIds),
+          supabase.from('blog_comments').select('blog_post_id').in('blog_post_id', postIds),
         ]);
 
         const profileMap = new Map((profiles || []).map(p => [p.user_id, p] as const));
         const menuMap = new Map((menuItems || []).map(m => [m.id, m] as const));
 
+        // Count likes and comments per post
+        const likeCountMap = new Map<string, number>();
+        (likes || []).forEach(l => likeCountMap.set(l.blog_post_id, (likeCountMap.get(l.blog_post_id) || 0) + 1));
+        const commentCountMap = new Map<string, number>();
+        (comments || []).forEach(c => commentCountMap.set(c.blog_post_id, (commentCountMap.get(c.blog_post_id) || 0) + 1));
+
         setPosts(postsData.map(p => ({
           ...p,
           profile: profileMap.get(p.user_id) || { username: null, avatar_url: null },
           menu_item: p.menu_item_id ? (menuMap.get(p.menu_item_id) as { name: string; emoji: string } | undefined) || null : null,
+          like_count: likeCountMap.get(p.id) || 0,
+          comment_count: commentCountMap.get(p.id) || 0,
         })));
       }
       setLoading(false);
@@ -120,15 +133,25 @@ const Blog = () => {
                     <p className="font-quicksand text-sm text-muted-foreground line-clamp-3 mb-4">
                       {post.excerpt}
                     </p>
-                    <div className="mt-auto flex items-center gap-3 text-xs text-muted-foreground font-quicksand">
-                      <span className="flex items-center gap-1">
-                        <UserIcon className="h-3.5 w-3.5" />
-                        {post.profile?.username || 'Food Lover'}
-                      </span>
-                      <span className="flex items-center gap-1">
-                        <Clock className="h-3.5 w-3.5" />
-                        {new Date(post.created_at).toLocaleDateString()}
-                      </span>
+                    <div className="mt-auto flex items-center justify-between text-xs text-muted-foreground font-quicksand">
+                      <div className="flex items-center gap-3">
+                        <span className="flex items-center gap-1">
+                          <UserIcon className="h-3.5 w-3.5" />
+                          {post.profile?.username || 'Food Lover'}
+                        </span>
+                        <span className="flex items-center gap-1">
+                          <Clock className="h-3.5 w-3.5" />
+                          {new Date(post.created_at).toLocaleDateString()}
+                        </span>
+                      </div>
+                      <div className="flex items-center gap-3">
+                        <span className="flex items-center gap-1">
+                          <Heart className="h-3.5 w-3.5" /> {post.like_count}
+                        </span>
+                        <span className="flex items-center gap-1">
+                          <MessageCircle className="h-3.5 w-3.5" /> {post.comment_count}
+                        </span>
+                      </div>
                     </div>
                   </div>
                 </article>
