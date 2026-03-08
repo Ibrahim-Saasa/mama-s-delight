@@ -25,6 +25,7 @@ const Header = () => {
     { label: 'Menu', pun: "What's cooking?", path: '/menu' },
     { label: 'Cuisines', pun: 'World tour!', path: '/cuisines' },
     { label: 'Blog', pun: 'Tasty reads!', path: '/blog' },
+    { label: 'Desserts', pun: 'Sweet tooth!', path: '/desserts' },
     { label: 'About', pun: 'Our story!', path: '/about' },
   ];
 
