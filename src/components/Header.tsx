@@ -48,7 +48,7 @@ const Header = () => {
         </Link>
 
         {/* Desktop Navigation Links */}
-        <ul className="hidden md:flex items-center gap-6">
+        <ul className="hidden md:flex items-center gap-3 lg:gap-6 text-sm lg:text-base">
           {navItems.map((item) => (
             <li key={item.label} className="pun-trigger relative group">
               <Link 
