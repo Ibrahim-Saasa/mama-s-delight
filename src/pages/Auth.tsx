@@ -122,7 +122,11 @@ const Auth = () => {
       `🔐 Your BiteSide Story verification code is: *${otp}*\n\nPlease enter this code to sign in. Do not share this code with anyone.`
     );
     const whatsappUrl = `https://wa.me/${clean}?text=${message}`;
-    window.open(whatsappUrl, '_blank');
+    const link = document.createElement('a');
+    link.href = whatsappUrl;
+    link.target = '_blank';
+    link.rel = 'noopener noreferrer';
+    link.click();
 
     setTimeout(() => {
       setSendingOtp(false);
