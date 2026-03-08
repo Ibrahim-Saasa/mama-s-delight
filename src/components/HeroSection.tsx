@@ -57,7 +57,7 @@ const HeroSection = () => {
             className="flex flex-wrap items-center justify-center gap-6 pt-2 opacity-0 animate-slide-up"
             style={{ animationDelay: '600ms', animationFillMode: 'forwards' }}
           >
-            <button className="group relative inline-flex items-center justify-center gap-3 px-10 py-5 font-fredoka font-bold text-xl bg-gradient-to-r from-primary to-pink-medium text-primary-foreground rounded-[2rem_2rem_3rem_3rem] shadow-glow-pink hover:shadow-[0_0_40px_hsl(340_70%_75%_/_0.6)] hover:scale-110 hover:-rotate-2 active:scale-95 transition-all duration-300 border-4 border-primary/30 overflow-hidden">
+            <button onClick={() => navigate('/desserts')} className="group relative inline-flex items-center justify-center gap-3 px-10 py-5 font-fredoka font-bold text-xl bg-gradient-to-r from-primary to-pink-medium text-primary-foreground rounded-[2rem_2rem_3rem_3rem] shadow-glow-pink hover:shadow-[0_0_40px_hsl(340_70%_75%_/_0.6)] hover:scale-110 hover:-rotate-2 active:scale-95 transition-all duration-300 border-4 border-primary/30 overflow-hidden">
               {/* Shimmer overlay */}
               <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
               <Cake className="group-hover:animate-icon-bounce transition-transform" size={24} />
