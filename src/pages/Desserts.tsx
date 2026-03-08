@@ -87,7 +87,7 @@ const Desserts = () => {
               <h1 className="font-fredoka text-5xl md:text-7xl text-white mb-3 drop-shadow-lg">
                 Sweet Endings 🍰
               </h1>
-              <p className="font-quicksand text-lg md:text-xl text-muted-foreground max-w-2xl drop-shadow">
+              <p className="font-quicksand text-lg md:text-xl text-white/90 max-w-2xl drop-shadow">
                 Explore pastries, sweets & desserts from every corner of the globe — all 100% Halal!
               </p>
             </div>
