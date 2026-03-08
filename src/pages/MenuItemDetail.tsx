@@ -361,7 +361,7 @@ const MenuItemDetail = () => {
 
         {/* Back to Menu CTA */}
         <div className="text-center">
-          <Link to="/menu">
+          <Link to="/menu" className="mt-4">
             <Button variant="outline" className="rounded-full font-fredoka text-lg px-8 py-5">
               🍽️ Explore Full Menu
             </Button>
