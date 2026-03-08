@@ -1,0 +1,17 @@
+INSERT INTO public.menu_items (name, description, emoji, category, price, is_spicy, is_vegetarian, slug) VALUES
+('Classic Espresso', 'Rich and bold single shot of pure coffee perfection', '☕', 'cafe', 3.50, false, true, 'classic-espresso'),
+('Cappuccino', 'Velvety steamed milk with a perfect foam crown', '☕', 'cafe', 4.50, false, true, 'cappuccino'),
+('Café Latte', 'Smooth espresso blended with creamy steamed milk', '🥛', 'cafe', 4.50, false, true, 'cafe-latte'),
+('Iced Americano', 'Bold espresso over ice for a refreshing kick', '🧊', 'cafe', 4.00, false, true, 'iced-americano'),
+('Caramel Macchiato', 'Vanilla-infused latte drizzled with buttery caramel', '🍮', 'cafe', 5.50, false, true, 'caramel-macchiato'),
+('Mocha', 'Chocolate meets espresso in a heavenly hug', '🍫', 'cafe', 5.50, false, true, 'mocha'),
+('Karak Chai', 'Traditional spiced tea simmered with cardamom and evaporated milk', '🫖', 'cafe', 3.00, false, true, 'karak-chai'),
+('Masala Chai', 'Aromatic Indian tea with ginger, cinnamon and cloves', '🍵', 'cafe', 3.50, true, true, 'masala-chai'),
+('Mint Green Tea', 'Refreshing green tea with fresh mint leaves', '🌿', 'cafe', 3.00, false, true, 'mint-green-tea'),
+('Turkish Coffee', 'Finely ground coffee brewed the traditional way', '☕', 'cafe', 4.00, false, true, 'turkish-coffee'),
+('Matcha Latte', 'Premium Japanese matcha whisked with creamy milk', '🍵', 'cafe', 5.00, false, true, 'matcha-latte'),
+('Hot Chocolate', 'Rich Belgian chocolate melted into warm frothy milk', '🍫', 'cafe', 4.50, false, true, 'hot-chocolate'),
+('Affogato', 'Vanilla gelato drowned in a shot of hot espresso', '🍨', 'cafe', 5.50, false, true, 'affogato'),
+('Saffron Latte', 'Luxurious saffron-infused milk with a hint of cardamom', '🌼', 'cafe', 5.50, false, true, 'saffron-latte'),
+('Iced Rose Lemonade', 'Pink lemonade with rose water and crushed ice', '🌹', 'cafe', 4.00, false, true, 'iced-rose-lemonade'),
+('Dalgona Coffee', 'Whipped coffee clouds over chilled milk', '☁️', 'cafe', 5.00, false, true, 'dalgona-coffee');
