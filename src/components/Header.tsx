@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import logo from '@/assets/logo.png';
 import { cn } from '@/lib/utils';
@@ -12,13 +13,14 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { LogOut, User } from 'lucide-react';
+import { LogOut, User, Menu, X } from 'lucide-react';
 import CartSheet from './CartSheet';
 
 const Header = () => {
   const location = useLocation();
   const { user, signOut } = useAuth();
   const { profile } = useProfile();
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const navItems = [
     { label: 'Home', pun: 'Sweet home!', path: '/' },
@@ -44,7 +46,7 @@ const Header = () => {
           </span>
         </Link>
 
-        {/* Navigation Links */}
+        {/* Desktop Navigation Links */}
         <ul className="hidden md:flex items-center gap-6">
           {navItems.map((item) => (
             <li key={item.label} className="pun-trigger relative group">
@@ -70,7 +72,7 @@ const Header = () => {
           ))}
         </ul>
 
-        {/* Cart & Auth Links */}
+        {/* Cart, Auth & Mobile Burger */}
         <div className="flex items-center gap-3">
           <CartSheet />
           
@@ -115,7 +117,7 @@ const Header = () => {
               </DropdownMenuContent>
             </DropdownMenu>
           ) : (
-            <>
+            <div className="hidden md:flex items-center gap-3">
               <Link 
                 to="/auth" 
                 className="font-quicksand font-semibold text-foreground/80 hover:text-primary transition-colors"
@@ -128,10 +130,64 @@ const Header = () => {
               >
                 Sign Up
               </Link>
-            </>
+            </div>
           )}
+
+          {/* Mobile Burger Button */}
+          <button
+            className="md:hidden flex items-center justify-center w-10 h-10 rounded-xl bg-muted/50 text-foreground hover:bg-muted transition-colors"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label="Toggle menu"
+          >
+            {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+          </button>
         </div>
       </nav>
+
+      {/* Mobile Menu Dropdown */}
+      <div
+        className={cn(
+          'md:hidden overflow-hidden transition-all duration-300 ease-in-out bg-background/95 backdrop-blur-lg border-b border-border/50',
+          mobileMenuOpen ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'
+        )}
+      >
+        <ul className="container mx-auto px-4 py-4 flex flex-col gap-1">
+          {navItems.map((item) => (
+            <li key={item.label}>
+              <Link
+                to={item.path}
+                onClick={() => setMobileMenuOpen(false)}
+                className={cn(
+                  'block font-quicksand font-semibold py-3 px-4 rounded-xl transition-all duration-200',
+                  location.pathname === item.path
+                    ? 'text-primary bg-primary/10'
+                    : 'text-foreground/80 hover:text-primary hover:bg-muted/50'
+                )}
+              >
+                {item.label}
+              </Link>
+            </li>
+          ))}
+          {!user && (
+            <li className="flex gap-3 pt-3 mt-2 border-t border-border/30">
+              <Link
+                to="/auth"
+                onClick={() => setMobileMenuOpen(false)}
+                className="flex-1 text-center font-quicksand font-semibold py-3 rounded-xl text-foreground/80 hover:text-primary hover:bg-muted/50 transition-colors"
+              >
+                Sign In
+              </Link>
+              <Link
+                to="/auth"
+                onClick={() => setMobileMenuOpen(false)}
+                className="flex-1 text-center font-quicksand font-semibold py-3 rounded-xl bg-primary text-primary-foreground hover:bg-primary/90 transition-colors"
+              >
+                Sign Up
+              </Link>
+            </li>
+          )}
+        </ul>
+      </div>
     </header>
   );
 };
