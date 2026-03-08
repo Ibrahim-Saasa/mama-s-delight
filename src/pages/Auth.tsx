@@ -77,8 +77,7 @@ const Auth = () => {
             toast.error(error.message);
           }
         } else {
-          toast.success("Welcome aboard! 🎉 You're now signed up!");
-          navigate('/');
+          toast.success("Check your email! 📧 We've sent you a verification link to confirm your account.");
         }
       } else {
         const { error } = await signIn(email, password);
