@@ -80,7 +80,7 @@ const Desserts = () => {
             />
             <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent" />
             <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4">
-              <div className="inline-flex items-center gap-2 bg-primary/20 backdrop-blur-sm text-primary font-quicksand font-bold text-sm px-4 py-1.5 rounded-full mb-4 border border-primary/30">
+              <div className="inline-flex items-center gap-2 bg-background/80 backdrop-blur-md text-foreground font-quicksand font-bold text-sm px-4 py-1.5 rounded-full mb-4 border border-border shadow-md">
                 <Globe className="w-4 h-4" />
                 Sweets from Around the World
               </div>
