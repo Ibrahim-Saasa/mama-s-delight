@@ -18,6 +18,7 @@ import Blog from "./pages/Blog";
 import BlogPostDetail from "./pages/BlogPostDetail";
 import CreateBlogPost from "./pages/CreateBlogPost";
 import Desserts from "./pages/Desserts";
+import Cafe from "./pages/Cafe";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
