@@ -38,6 +38,9 @@ const Header = () => {
             alt="BiteSide Story" 
             className="h-14 w-auto"
           />
+          <span className="hidden sm:inline-flex items-center gap-1 bg-halal-bg text-halal text-[10px] font-quicksand font-bold px-2 py-0.5 rounded-full border border-halal-border">
+            ☪ 100% Halal
+          </span>
         </Link>
 
         {/* Navigation Links */}

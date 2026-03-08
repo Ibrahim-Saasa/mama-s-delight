@@ -47,6 +47,11 @@ export default {
           DEFAULT: "hsl(var(--popover))",
           foreground: "hsl(var(--popover-foreground))",
         },
+        halal: {
+          DEFAULT: "hsl(var(--halal))",
+          bg: "hsl(var(--halal-bg))",
+          border: "hsl(var(--halal-border))",
+        },
         card: {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",

@@ -39,6 +39,11 @@
     --input: 320 40% 90%;
     --ring: 340 70% 75%;
 
+    /* Halal badge */
+    --halal: 145 50% 42%;
+    --halal-bg: 145 50% 92%;
+    --halal-border: 145 40% 82%;
+
     --radius: 1.5rem;
 
     /* Custom Brand Colors */
