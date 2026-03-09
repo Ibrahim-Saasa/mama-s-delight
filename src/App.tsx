@@ -37,22 +37,22 @@ const App = () => (
           <BrowserRouter>
             <Suspense fallback={<CuteLoader />}>
               <Routes>
-                <Route path="/" element={<Index />} />
-                <Route path="/menu" element={<Menu />} />
-                <Route path="/menu/:slug" element={<MenuItemDetail />} />
-                <Route path="/auth" element={<Auth />} />
-                <Route path="/profile" element={<Profile />} />
-                <Route path="/cuisines" element={<Cuisines />} />
-                <Route path="/cuisine/:slug" element={<CuisineDetail />} />
-                <Route path="/about" element={<About />} />
-                <Route path="/blog" element={<Blog />} />
-                <Route path="/blog/new" element={<CreateBlogPost />} />
-                <Route path="/blog/:id" element={<BlogPostDetail />} />
-                <Route path="/desserts" element={<Desserts />} />
-                <Route path="/cafe" element={<Cafe />} />
-                <Route path="/checkout" element={<Checkout />} />
+                <Route path="/" element={<PageTransition><Index /></PageTransition>} />
+                <Route path="/menu" element={<PageTransition><Menu /></PageTransition>} />
+                <Route path="/menu/:slug" element={<PageTransition><MenuItemDetail /></PageTransition>} />
+                <Route path="/auth" element={<PageTransition><Auth /></PageTransition>} />
+                <Route path="/profile" element={<PageTransition><Profile /></PageTransition>} />
+                <Route path="/cuisines" element={<PageTransition><Cuisines /></PageTransition>} />
+                <Route path="/cuisine/:slug" element={<PageTransition><CuisineDetail /></PageTransition>} />
+                <Route path="/about" element={<PageTransition><About /></PageTransition>} />
+                <Route path="/blog" element={<PageTransition><Blog /></PageTransition>} />
+                <Route path="/blog/new" element={<PageTransition><CreateBlogPost /></PageTransition>} />
+                <Route path="/blog/:id" element={<PageTransition><BlogPostDetail /></PageTransition>} />
+                <Route path="/desserts" element={<PageTransition><Desserts /></PageTransition>} />
+                <Route path="/cafe" element={<PageTransition><Cafe /></PageTransition>} />
+                <Route path="/checkout" element={<PageTransition><Checkout /></PageTransition>} />
                 {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-                <Route path="*" element={<NotFound />} />
+                <Route path="*" element={<PageTransition><NotFound /></PageTransition>} />
               </Routes>
             </Suspense>
           </BrowserRouter>
