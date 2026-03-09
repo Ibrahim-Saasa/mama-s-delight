@@ -7,17 +7,17 @@ import { Cake, Coffee, Sparkles } from 'lucide-react';
 const HeroSection = () => {
   const navigate = useNavigate();
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-24 md:pt-0">
       {/* Hero Image Background */}
       <div className="absolute inset-0 z-0">
         <img 
           src={heroImage} 
           alt="Delicious homemade treats" 
-          className="w-full h-full object-cover"
+          className="w-full h-full object-cover object-center"
         />
-        {/* Animated gradient color shift overlay */}
-        <div className="absolute inset-0 bg-gradient-color-shift opacity-40" />
-        <div className="absolute inset-0 bg-gradient-to-b from-background/40 via-transparent to-transparent" />
+        {/* Animated gradient color shift overlay - lighter on mobile for better image visibility */}
+        <div className="absolute inset-0 bg-gradient-color-shift opacity-25 md:opacity-40" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background/20 md:from-background/40 via-transparent to-transparent" />
       </div>
 
       {/* Sparkle Particles */}
@@ -29,7 +29,7 @@ const HeroSection = () => {
       {/* Hero Content - Centered */}
       <div className="relative z-30 container mx-auto px-4 text-center flex flex-col items-center justify-center">
         {/* Content Box with backdrop */}
-        <div className="bg-background/80 backdrop-blur-md rounded-[3rem] p-8 md:p-12 max-w-3xl mx-auto shadow-card border border-primary/20">
+        <div className="bg-background/70 backdrop-blur-md rounded-[2rem] md:rounded-[3rem] p-6 md:p-12 max-w-3xl mx-auto shadow-card border border-primary/20">
           {/* Animated Tagline */}
           <h1 
             className="font-fredoka text-3xl md:text-5xl lg:text-6xl mb-6 opacity-0 animate-slide-up"
