@@ -7,6 +7,7 @@ import { AuthProvider } from "./hooks/useAuth";
 import { CartProvider } from "./hooks/useCart";
 import { Suspense, lazy } from "react";
 import CuteLoader from "./components/CuteLoader";
+import PageTransition from "./components/PageTransition";
 
 const Index = lazy(() => import("./pages/Index"));
 const Menu = lazy(() => import("./pages/Menu"));
