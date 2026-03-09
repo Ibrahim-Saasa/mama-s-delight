@@ -114,9 +114,29 @@ const Profile = () => {
                 onChange={handleAvatarChange}
               />
             </div>
-            <p className="text-sm text-muted-foreground font-quicksand">
-              Click the camera icon to update your photo
-            </p>
+            <div className="flex items-center gap-3">
+              <p className="text-sm text-muted-foreground font-quicksand">
+                Click the camera icon to update your photo
+              </p>
+              {profile?.avatar_url && (
+                <button
+                  onClick={async () => {
+                    setIsRemoving(true);
+                    await removeAvatar();
+                    setIsRemoving(false);
+                  }}
+                  disabled={isRemoving}
+                  className="text-xs font-quicksand font-semibold text-destructive hover:text-destructive/80 transition-colors flex items-center gap-1 disabled:opacity-50"
+                >
+                  {isRemoving ? (
+                    <div className="animate-spin rounded-full h-3 w-3 border-2 border-destructive border-t-transparent" />
+                  ) : (
+                    <Trash2 className="h-3 w-3" />
+                  )}
+                  Remove
+                </button>
+              )}
+            </div>
           </div>
 
           {/* Username */}
