@@ -64,7 +64,7 @@ const HeroSection = () => {
               Bite Me!
             </button>
 
-            <button className="group relative inline-flex items-center justify-center gap-3 px-10 py-5 font-fredoka font-bold text-xl bg-gradient-to-r from-accent to-yellow-medium text-accent-foreground rounded-lemon shadow-glow-yellow hover:shadow-[0_0_40px_hsl(45_90%_70%_/_0.7)] hover:scale-110 hover:rotate-3 active:scale-95 transition-all duration-300 overflow-hidden">
+            <button onClick={() => navigate('/cafe')} className="group relative inline-flex items-center justify-center gap-3 px-10 py-5 font-fredoka font-bold text-xl bg-gradient-to-r from-accent to-yellow-medium text-accent-foreground rounded-lemon shadow-glow-yellow hover:shadow-[0_0_40px_hsl(45_90%_70%_/_0.7)] hover:scale-110 hover:rotate-3 active:scale-95 transition-all duration-300 overflow-hidden">
               {/* Steam effect on hover */}
               <span className="absolute -top-4 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 group-hover:-translate-y-2 transition-all duration-500 text-2xl">
                 ☁️
