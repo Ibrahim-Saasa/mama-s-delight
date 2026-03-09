@@ -93,5 +93,30 @@ export const useProfile = () => {
     return avatarUrl;
   };
 
-  return { profile, loading, updateUsername, uploadAvatar, refetch: fetchProfile };
+  const removeAvatar = async () => {
+    if (!user) return false;
+
+    // Remove from storage
+    const { data: files } = await supabase.storage.from('avatars').list(user.id);
+    if (files && files.length > 0) {
+      await supabase.storage.from('avatars').remove(files.map(f => `${user.id}/${f.name}`));
+    }
+
+    // Clear URL in profile
+    const { error } = await supabase
+      .from('profiles')
+      .update({ avatar_url: null })
+      .eq('user_id', user.id);
+
+    if (error) {
+      toast.error('Failed to remove avatar');
+      return false;
+    }
+
+    setProfile(prev => prev ? { ...prev, avatar_url: null } : null);
+    toast.success('Avatar removed!');
+    return true;
+  };
+
+  return { profile, loading, updateUsername, uploadAvatar, removeAvatar, refetch: fetchProfile };
 };

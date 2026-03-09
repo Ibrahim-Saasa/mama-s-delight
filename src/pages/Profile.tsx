@@ -8,11 +8,11 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Camera, Save, Mail, UserRound, CalendarDays, Pencil } from 'lucide-react';
+import { Camera, Save, Mail, UserRound, CalendarDays, Pencil, Trash2 } from 'lucide-react';
 
 const Profile = () => {
   const { user, loading: authLoading } = useAuth();
-  const { profile, loading: profileLoading, updateUsername, uploadAvatar } = useProfile();
+  const { profile, loading: profileLoading, updateUsername, uploadAvatar, removeAvatar } = useProfile();
   const navigate = useNavigate();
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -20,6 +20,7 @@ const Profile = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
   const [isUploading, setIsUploading] = useState(false);
+  const [isRemoving, setIsRemoving] = useState(false);
 
   useEffect(() => {
     if (!authLoading && !user) {
@@ -113,9 +114,29 @@ const Profile = () => {
                 onChange={handleAvatarChange}
               />
             </div>
-            <p className="text-sm text-muted-foreground font-quicksand">
-              Click the camera icon to update your photo
-            </p>
+            <div className="flex items-center gap-3">
+              <p className="text-sm text-muted-foreground font-quicksand">
+                Click the camera icon to update your photo
+              </p>
+              {profile?.avatar_url && (
+                <button
+                  onClick={async () => {
+                    setIsRemoving(true);
+                    await removeAvatar();
+                    setIsRemoving(false);
+                  }}
+                  disabled={isRemoving}
+                  className="text-xs font-quicksand font-semibold text-destructive hover:text-destructive/80 transition-colors flex items-center gap-1 disabled:opacity-50"
+                >
+                  {isRemoving ? (
+                    <div className="animate-spin rounded-full h-3 w-3 border-2 border-destructive border-t-transparent" />
+                  ) : (
+                    <Trash2 className="h-3 w-3" />
+                  )}
+                  Remove
+                </button>
+              )}
+            </div>
           </div>
 
           {/* Username */}
