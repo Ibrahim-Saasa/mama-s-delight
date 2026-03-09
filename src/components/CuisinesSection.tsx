@@ -57,19 +57,19 @@ const CuisinesSection = () => {
                   alt={`${cuisine.name} cuisine`}
                   className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-110"
                 />
+
+                {/* Hover overlay with name badge inside the card */}
+                <div className="absolute inset-0 bg-gradient-to-t from-primary/80 via-primary/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-5">
+                  <span className="font-fredoka text-lg font-semibold text-primary-foreground px-5 py-1.5 rounded-full bg-primary/60 backdrop-blur-sm shadow-soft whitespace-nowrap">
+                    Explore {cuisine.name}!
+                  </span>
+                </div>
               </div>
 
               {/* Quick Fun Fact */}
               <p className="font-quicksand text-sm text-muted-foreground text-center mt-3 max-w-56 md:max-w-64 mx-auto leading-snug">
                 {cuisine.quickFact}
               </p>
-
-              {/* Name badge on hover */}
-              <div className="absolute bottom-8 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-all duration-300 transform group-hover:translate-y-0 translate-y-2">
-                <span className="font-fredoka text-lg font-semibold text-primary-foreground bg-primary px-6 py-2 rounded-full shadow-soft whitespace-nowrap">
-                  Explore {cuisine.name}!
-                </span>
-              </div>
             </Link>
           ))}
         </div>
