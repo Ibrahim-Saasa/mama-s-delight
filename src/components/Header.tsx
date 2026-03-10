@@ -46,11 +46,13 @@ const Header = () => {
   // Close search on route change
   useEffect(() => {
     setSearchOpen(false);
+    setMobileSearchOpen(false);
     setSearchQuery('');
   }, [location.pathname]);
 
   const closeSearch = () => {
     setSearchOpen(false);
+    setMobileSearchOpen(false);
     setSearchQuery('');
     setMobileMenuOpen(false);
   };
