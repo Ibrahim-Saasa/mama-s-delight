@@ -16,6 +16,8 @@ import {
 import { LogOut, User, Menu, X, Search } from 'lucide-react';
 import CartSheet from './CartSheet';
 import { Input } from '@/components/ui/input';
+import { useSearch } from '@/hooks/useSearch';
+import SearchResults from './SearchResults';
 
 const Header = () => {
   const location = useLocation();
