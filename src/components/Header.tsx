@@ -26,6 +26,7 @@ const Header = () => {
   const { profile } = useProfile();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
+  const [mobileSearchOpen, setMobileSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const { results, loading } = useSearch(searchQuery);
   const searchContainerRef = useRef<HTMLDivElement>(null);
@@ -45,11 +46,13 @@ const Header = () => {
   // Close search on route change
   useEffect(() => {
     setSearchOpen(false);
+    setMobileSearchOpen(false);
     setSearchQuery('');
   }, [location.pathname]);
 
   const closeSearch = () => {
     setSearchOpen(false);
+    setMobileSearchOpen(false);
     setSearchQuery('');
     setMobileMenuOpen(false);
   };
@@ -145,7 +148,7 @@ const Header = () => {
 
         {/* Cart, Auth & Mobile Burger */}
         <div className="flex items-center gap-3">
-          {/* Search Icon */}
+          {/* Search Icon - Desktop */}
           <button
             onClick={() => setSearchOpen(!searchOpen)}
             className={cn(
@@ -155,6 +158,18 @@ const Header = () => {
             aria-label="Search"
           >
             <Search className="w-5 h-5" />
+          </button>
+
+          {/* Search Icon - Mobile */}
+          <button
+            onClick={() => { setMobileSearchOpen(!mobileSearchOpen); setSearchQuery(''); }}
+            className={cn(
+              'md:hidden flex items-center justify-center w-10 h-10 rounded-full transition-colors',
+              mobileSearchOpen ? 'bg-primary/10 text-primary' : 'text-foreground/70 hover:text-primary hover:bg-muted/50'
+            )}
+            aria-label="Search"
+          >
+            {mobileSearchOpen ? <X className="w-5 h-5" /> : <Search className="w-5 h-5" />}
           </button>
 
           <CartSheet />
@@ -227,15 +242,14 @@ const Header = () => {
         </div>
       </nav>
 
-      {/* Mobile Menu Dropdown */}
+      {/* Mobile Search Bar - slides down below navbar */}
       <div
         className={cn(
-          'md:hidden overflow-hidden transition-all duration-300 ease-in-out bg-background/95 backdrop-blur-lg border-b border-border/50',
-          mobileMenuOpen ? 'max-h-[600px] opacity-100' : 'max-h-0 opacity-0'
+          'md:hidden overflow-hidden transition-all duration-300 ease-in-out bg-background/90 backdrop-blur-lg',
+          mobileSearchOpen ? 'max-h-[400px] opacity-100 border-b border-border/50' : 'max-h-0 opacity-0'
         )}
       >
-        {/* Mobile Search */}
-        <div className="container mx-auto px-4 pt-4 pb-2">
+        <div className="container mx-auto px-4 py-3">
           <div className="relative">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
             <Input
@@ -244,9 +258,9 @@ const Header = () => {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="pl-10 h-10 rounded-full border-primary/30 focus-visible:ring-primary/30 bg-muted/50 font-quicksand"
+              autoFocus={mobileSearchOpen}
             />
           </div>
-          {/* Mobile search results */}
           <SearchResults
             results={results}
             loading={loading}
@@ -255,6 +269,15 @@ const Header = () => {
             className="mt-2"
           />
         </div>
+      </div>
+
+      {/* Mobile Menu Dropdown */}
+      <div
+        className={cn(
+          'md:hidden overflow-hidden transition-all duration-300 ease-in-out bg-background/95 backdrop-blur-lg border-b border-border/50',
+          mobileMenuOpen ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'
+        )}
+      >
         <ul className="container mx-auto px-4 pb-4 flex flex-col gap-1">
           {navItems.map((item) => (
             <li key={item.label}>
