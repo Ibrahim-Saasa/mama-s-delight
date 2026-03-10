@@ -108,6 +108,18 @@ const Header = () => {
 
         {/* Cart, Auth & Mobile Burger */}
         <div className="flex items-center gap-3">
+          {/* Search Icon */}
+          <button
+            onClick={() => setSearchOpen(!searchOpen)}
+            className={cn(
+              'hidden md:flex items-center justify-center w-10 h-10 rounded-full transition-colors',
+              searchOpen ? 'bg-primary/10 text-primary' : 'text-foreground/70 hover:text-primary hover:bg-muted/50'
+            )}
+            aria-label="Search"
+          >
+            <Search className="w-5 h-5" />
+          </button>
+
           <CartSheet />
           
           {user ? (
