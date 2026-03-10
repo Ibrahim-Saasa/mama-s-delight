@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { useState, useRef, useEffect } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import logo from '@/assets/logo.png';
 import { cn } from '@/lib/utils';
 import { useAuth } from '@/hooks/useAuth';
@@ -16,14 +16,43 @@ import {
 import { LogOut, User, Menu, X, Search } from 'lucide-react';
 import CartSheet from './CartSheet';
 import { Input } from '@/components/ui/input';
+import { useSearch } from '@/hooks/useSearch';
+import SearchResults from './SearchResults';
 
 const Header = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const { user, signOut } = useAuth();
   const { profile } = useProfile();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
+  const { results, loading } = useSearch(searchQuery);
+  const searchContainerRef = useRef<HTMLDivElement>(null);
+
+  // Close search on click outside
+  useEffect(() => {
+    const handler = (e: MouseEvent) => {
+      if (searchContainerRef.current && !searchContainerRef.current.contains(e.target as Node)) {
+        setSearchOpen(false);
+        setSearchQuery('');
+      }
+    };
+    if (searchOpen) document.addEventListener('mousedown', handler);
+    return () => document.removeEventListener('mousedown', handler);
+  }, [searchOpen]);
+
+  // Close search on route change
+  useEffect(() => {
+    setSearchOpen(false);
+    setSearchQuery('');
+  }, [location.pathname]);
+
+  const closeSearch = () => {
+    setSearchOpen(false);
+    setSearchQuery('');
+    setMobileMenuOpen(false);
+  };
 
   const navItems = [
     { label: 'Home', pun: 'Sweet home!', path: '/' },
@@ -51,7 +80,7 @@ const Header = () => {
         </Link>
 
         {/* Desktop Navigation Links + Search Overlay */}
-        <div className="hidden md:flex items-center gap-3 lg:gap-6 relative">
+        <div className="hidden md:flex items-center gap-3 lg:gap-6 relative" ref={searchContainerRef}>
           {/* Nav links - fade out when search is open */}
           <ul className={cn(
             'flex items-center gap-3 lg:gap-6 text-sm lg:text-base transition-all duration-300',
@@ -97,11 +126,19 @@ const Header = () => {
                 autoFocus={searchOpen}
               />
               <button
-                onClick={() => { setSearchOpen(false); setSearchQuery(''); }}
+                onClick={closeSearch}
                 className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
               >
                 <X className="h-4 w-4" />
               </button>
+              {/* Desktop search results dropdown */}
+              <SearchResults
+                results={results}
+                loading={loading}
+                query={searchQuery}
+                onSelect={closeSearch}
+                className="absolute top-12 left-0 right-0 z-50"
+              />
             </div>
           </div>
         </div>
@@ -194,7 +231,7 @@ const Header = () => {
       <div
         className={cn(
           'md:hidden overflow-hidden transition-all duration-300 ease-in-out bg-background/95 backdrop-blur-lg border-b border-border/50',
-          mobileMenuOpen ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'
+          mobileMenuOpen ? 'max-h-[600px] opacity-100' : 'max-h-0 opacity-0'
         )}
       >
         {/* Mobile Search */}
@@ -209,6 +246,14 @@ const Header = () => {
               className="pl-10 h-10 rounded-full border-primary/30 focus-visible:ring-primary/30 bg-muted/50 font-quicksand"
             />
           </div>
+          {/* Mobile search results */}
+          <SearchResults
+            results={results}
+            loading={loading}
+            query={searchQuery}
+            onSelect={closeSearch}
+            className="mt-2"
+          />
         </div>
         <ul className="container mx-auto px-4 pb-4 flex flex-col gap-1">
           {navItems.map((item) => (
