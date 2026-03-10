@@ -80,7 +80,7 @@ const Header = () => {
         </Link>
 
         {/* Desktop Navigation Links + Search Overlay */}
-        <div className="hidden md:flex items-center gap-3 lg:gap-6 relative">
+        <div className="hidden md:flex items-center gap-3 lg:gap-6 relative" ref={searchContainerRef}>
           {/* Nav links - fade out when search is open */}
           <ul className={cn(
             'flex items-center gap-3 lg:gap-6 text-sm lg:text-base transition-all duration-300',
@@ -126,11 +126,19 @@ const Header = () => {
                 autoFocus={searchOpen}
               />
               <button
-                onClick={() => { setSearchOpen(false); setSearchQuery(''); }}
+                onClick={closeSearch}
                 className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
               >
                 <X className="h-4 w-4" />
               </button>
+              {/* Desktop search results dropdown */}
+              <SearchResults
+                results={results}
+                loading={loading}
+                query={searchQuery}
+                onSelect={closeSearch}
+                className="absolute top-12 left-0 right-0 z-50"
+              />
             </div>
           </div>
         </div>
