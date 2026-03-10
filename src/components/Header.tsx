@@ -26,6 +26,7 @@ const Header = () => {
   const { profile } = useProfile();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
+  const [mobileSearchOpen, setMobileSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const { results, loading } = useSearch(searchQuery);
   const searchContainerRef = useRef<HTMLDivElement>(null);
