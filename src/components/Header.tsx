@@ -13,8 +13,9 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { LogOut, User, Menu, X } from 'lucide-react';
+import { LogOut, User, Menu, X, Search } from 'lucide-react';
 import CartSheet from './CartSheet';
+import { Input } from '@/components/ui/input';
 
 const Header = () => {
   const location = useLocation();
