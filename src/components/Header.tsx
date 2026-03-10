@@ -13,14 +13,17 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { LogOut, User, Menu, X } from 'lucide-react';
+import { LogOut, User, Menu, X, Search } from 'lucide-react';
 import CartSheet from './CartSheet';
+import { Input } from '@/components/ui/input';
 
 const Header = () => {
   const location = useLocation();
   const { user, signOut } = useAuth();
   const { profile } = useProfile();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
 
   const navItems = [
     { label: 'Home', pun: 'Sweet home!', path: '/' },
@@ -47,34 +50,76 @@ const Header = () => {
           </span>
         </Link>
 
-        {/* Desktop Navigation Links */}
-        <ul className="hidden md:flex items-center gap-3 lg:gap-6 text-sm lg:text-base">
-          {navItems.map((item) => (
-            <li key={item.label} className="pun-trigger relative group">
-              <Link 
-                to={item.path}
-                className={cn(
-                  'font-quicksand font-semibold transition-all duration-300 py-2 px-1 relative',
-                  'after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5',
-                  'after:bg-gradient-to-r after:from-primary after:to-accent',
-                  'after:scale-x-0 after:origin-left after:transition-transform after:duration-300',
-                  'group-hover:after:scale-x-100',
-                  location.pathname === item.path 
-                    ? 'text-primary after:scale-x-100' 
-                    : 'text-foreground/80 hover:text-primary'
-                )}
+        {/* Desktop Navigation Links + Search Overlay */}
+        <div className="hidden md:flex items-center gap-3 lg:gap-6 relative">
+          {/* Nav links - fade out when search is open */}
+          <ul className={cn(
+            'flex items-center gap-3 lg:gap-6 text-sm lg:text-base transition-all duration-300',
+            searchOpen ? 'opacity-0 pointer-events-none scale-95' : 'opacity-100 scale-100'
+          )}>
+            {navItems.map((item) => (
+              <li key={item.label} className="pun-trigger relative group">
+                <Link 
+                  to={item.path}
+                  className={cn(
+                    'font-quicksand font-semibold transition-all duration-300 py-2 px-1 relative',
+                    'after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5',
+                    'after:bg-gradient-to-r after:from-primary after:to-accent',
+                    'after:scale-x-0 after:origin-left after:transition-transform after:duration-300',
+                    'group-hover:after:scale-x-100',
+                    location.pathname === item.path 
+                      ? 'text-primary after:scale-x-100' 
+                      : 'text-foreground/80 hover:text-primary'
+                  )}
+                >
+                  {item.label}
+                </Link>
+                <span className="pun-tooltip -bottom-10 left-1/2 -translate-x-1/2">
+                  {item.pun}
+                </span>
+              </li>
+            ))}
+          </ul>
+
+          {/* Search overlay */}
+          <div className={cn(
+            'absolute inset-0 flex items-center transition-all duration-300',
+            searchOpen ? 'opacity-100 scale-100' : 'opacity-0 pointer-events-none scale-95'
+          )}>
+            <div className="relative w-full">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+              <Input
+                type="text"
+                placeholder="Search dishes, cuisines, blogs..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="pl-10 pr-10 h-10 rounded-full border-primary/30 focus-visible:ring-primary/30 bg-muted/50 font-quicksand"
+                autoFocus={searchOpen}
+              />
+              <button
+                onClick={() => { setSearchOpen(false); setSearchQuery(''); }}
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
               >
-                {item.label}
-              </Link>
-              <span className="pun-tooltip -bottom-10 left-1/2 -translate-x-1/2">
-                {item.pun}
-              </span>
-            </li>
-          ))}
-        </ul>
+                <X className="h-4 w-4" />
+              </button>
+            </div>
+          </div>
+        </div>
 
         {/* Cart, Auth & Mobile Burger */}
         <div className="flex items-center gap-3">
+          {/* Search Icon */}
+          <button
+            onClick={() => setSearchOpen(!searchOpen)}
+            className={cn(
+              'hidden md:flex items-center justify-center w-10 h-10 rounded-full transition-colors',
+              searchOpen ? 'bg-primary/10 text-primary' : 'text-foreground/70 hover:text-primary hover:bg-muted/50'
+            )}
+            aria-label="Search"
+          >
+            <Search className="w-5 h-5" />
+          </button>
+
           <CartSheet />
           
           {user ? (
