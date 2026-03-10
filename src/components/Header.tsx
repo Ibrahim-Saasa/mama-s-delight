@@ -231,7 +231,7 @@ const Header = () => {
       <div
         className={cn(
           'md:hidden overflow-hidden transition-all duration-300 ease-in-out bg-background/95 backdrop-blur-lg border-b border-border/50',
-          mobileMenuOpen ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'
+          mobileMenuOpen ? 'max-h-[600px] opacity-100' : 'max-h-0 opacity-0'
         )}
       >
         {/* Mobile Search */}
@@ -246,6 +246,14 @@ const Header = () => {
               className="pl-10 h-10 rounded-full border-primary/30 focus-visible:ring-primary/30 bg-muted/50 font-quicksand"
             />
           </div>
+          {/* Mobile search results */}
+          <SearchResults
+            results={results}
+            loading={loading}
+            query={searchQuery}
+            onSelect={closeSearch}
+            className="mt-2"
+          />
         </div>
         <ul className="container mx-auto px-4 pb-4 flex flex-col gap-1">
           {navItems.map((item) => (
