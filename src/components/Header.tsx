@@ -197,7 +197,20 @@ const Header = () => {
           mobileMenuOpen ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'
         )}
       >
-        <ul className="container mx-auto px-4 py-4 flex flex-col gap-1">
+        {/* Mobile Search */}
+        <div className="container mx-auto px-4 pt-4 pb-2">
+          <div className="relative">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+            <Input
+              type="text"
+              placeholder="Search dishes, cuisines, blogs..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="pl-10 h-10 rounded-full border-primary/30 focus-visible:ring-primary/30 bg-muted/50 font-quicksand"
+            />
+          </div>
+        </div>
+        <ul className="container mx-auto px-4 pb-4 flex flex-col gap-1">
           {navItems.map((item) => (
             <li key={item.label}>
               <Link
