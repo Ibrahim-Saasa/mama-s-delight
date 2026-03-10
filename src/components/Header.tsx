@@ -22,6 +22,8 @@ const Header = () => {
   const { user, signOut } = useAuth();
   const { profile } = useProfile();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
 
   const navItems = [
     { label: 'Home', pun: 'Sweet home!', path: '/' },
