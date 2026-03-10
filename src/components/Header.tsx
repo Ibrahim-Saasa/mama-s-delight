@@ -21,11 +21,38 @@ import SearchResults from './SearchResults';
 
 const Header = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const { user, signOut } = useAuth();
   const { profile } = useProfile();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
+  const { results, loading } = useSearch(searchQuery);
+  const searchContainerRef = useRef<HTMLDivElement>(null);
+
+  // Close search on click outside
+  useEffect(() => {
+    const handler = (e: MouseEvent) => {
+      if (searchContainerRef.current && !searchContainerRef.current.contains(e.target as Node)) {
+        setSearchOpen(false);
+        setSearchQuery('');
+      }
+    };
+    if (searchOpen) document.addEventListener('mousedown', handler);
+    return () => document.removeEventListener('mousedown', handler);
+  }, [searchOpen]);
+
+  // Close search on route change
+  useEffect(() => {
+    setSearchOpen(false);
+    setSearchQuery('');
+  }, [location.pathname]);
+
+  const closeSearch = () => {
+    setSearchOpen(false);
+    setSearchQuery('');
+    setMobileMenuOpen(false);
+  };
 
   const navItems = [
     { label: 'Home', pun: 'Sweet home!', path: '/' },
